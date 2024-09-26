@@ -15,9 +15,10 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Localizar o Botão "Não tenho Conta" no Layout
-        Button naoTenhoConta = findViewById(R.id.btnNaoTenhoConta);
+        Button naoTenhoConta = findViewById(R.id.btnAssociarSe);
 
         // Definir a ação do clique do botão
         naoTenhoConta.setOnClickListener(new View.OnClickListener(){
@@ -57,12 +58,14 @@ public class MainActivity extends AppCompatActivity {
         String usuario = campoUsuario.getText().toString();
         String senha = campoSenha.getText().toString();
 
-        // VALIDAÇÃO ENTRADA ZERADA
+        // Validação entrada zerada
         if(TextUtils.isEmpty(usuario) || TextUtils.isEmpty(senha)){
             mensagem.setText("Usuário ou senha incorretos! Digite novamente");
             return;
+        }else {
+            Intent intent = new Intent(this, telaPrincipal.class);
+            startActivity(intent);
         }
-        mensagem.setText("Acesso permitido");
     }
 
 }

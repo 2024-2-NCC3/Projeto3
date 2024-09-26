@@ -13,6 +13,18 @@
         android:theme="@style/Theme.AppApoefTeste"
         tools:targetApi="31">
         <activity
+            android:name=".telaCalendario"
+            android:exported="false" />
+        <activity
+            android:name=".telaResultado"
+            android:exported="false" />
+        <activity
+            android:name=".telaInformacoes"
+            android:exported="false" />
+        <activity
+            android:name=".telaPrincipal"
+            android:exported="false" />
+        <activity
             android:name=".telaProva"
             android:exported="false" />
         <activity

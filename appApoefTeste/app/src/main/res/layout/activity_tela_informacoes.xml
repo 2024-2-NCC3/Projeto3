@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".telaInformacoes">
+
+    <ScrollView
+        android:layout_width="391dp"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:text="INFORMAÇÕES SOBRE SER UM ASSOCIADO"
+                android:textAlignment="center"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="972dp"
+                android:paddingLeft="8dp"
+                android:paddingBottom="8dp"
+                android:text="1 – Os interessados em se associar deverão realizar prova de múltipla escolha para
+a avaliação de conhecimentos.
+	40 (quarenta) questões de múltipla escolha
+	50 (cinquenta) minutos de duração
+O candidato deverá ter aproveitamento mínimo de 80% de acertos na prova, o que
+equivale ao mínimo de 32 acertos para ser credenciado como associado da APOEF.​
+
+2 - Caso reprovado na primeira prova, deverá pagar R$ 20,00 (vinte reais) para
+realizar nova prova após 10 (dez) dias da reprovação.​
+
+3 – A prova é  baseada nos seguintes assuntos:
+- Gestão Financeira (Finanças Pessoais)
+- Gestão de Riscos (Seguros)
+- Gestão de Ativos (Investimentos)
+- Planejamento Tributário (Impostos)
+- Planejamento da Aposentadoria (Previdência)
+- Planejamento Sucessório (Inventário)
+- Matemática Financeira
+- Economia
+- Psicologia Econômica
+
+4 – O material de estudos está disponível em nosso site na guia Quero me associar.
+
+5 – Após aprovação em prova, deverá providenciar o seu credenciamento
+preenchendo e assinando ficha de associação, com a entrega da cópia simples do
+comprovante de residência (dos últimos 60 dias);
+	cópia simples do RG, CPF ou CNH ou documento de identidade de conselhos
+ou ordens de classe ou RNE ou CIE; envio de foto legível para cadastro;
+	envio de currículo atualizado;
+	envio de projeto com Educação Financeira e vídeo de no máximo 3 (três)
+minutos, se apresentando e justificando a razão de ser um Educador em Finanças.
+
+ 6 – Na ficha de associação definirá a forma de pagamento da sua anuidade,
+conforme valor divulgado no site da associação para o ano vigente. Deverá renovar
+seu vínculo com a associação anualmente, ciente que a renovação ocorrerá no prazo
+ de 1 (um) ano a partir da data da adesão.​
+
+7 – O novo associado deverá definir a forma de pagamento da sua anuidade.
+Optando pelas opções:
+ - PIX (Pagamento Instantâneo Brasileiro.
+ - Boleto bancário no valor total da anuidade.
+ - Cartão de Crédito no total da anuidade
+ - Cartão de Crédito em duas parcelas.
+
+8 – O valor da anuidade no ano vigente de 2022, foi definido em R$ 150,00
+(Cento e Cinquenta Reais);
+
+9 – Após confirmação do pagamento da anuidade o novo associado receberá
+credencial que o qualifica como Educador em Finanças da APOEF (Associação de
+Profissionais Orientadores e Educadores em Finanças).
+
+10  – Todos os sócios têm ciência e livre acesso ao estatuto social da APOEF, e que
+a qualquer momento que o solicite diretamente na sede da associação receberá
+o documento."
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
