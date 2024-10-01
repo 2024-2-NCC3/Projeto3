@@ -30,4 +30,7 @@ A nossa proposta é contribuir para uma educação financeira inclusiva, proporc
 <a href="https://www.appoef.org/">APPOEF</a>
 
 
+<a href="https://planner.cloud.microsoft/edu.fecap.br/pt-BR/Home/Planner/#/plantaskboard?groupId=543edac8-2b63-4d48-97c5-42c2cc98ba86&planId=4COb-dENKkWdoWVBNVAY02QAGbfD">Planner</a>
+
+
 
