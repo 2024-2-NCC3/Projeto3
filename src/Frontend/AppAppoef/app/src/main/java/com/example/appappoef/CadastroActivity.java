@@ -73,7 +73,8 @@ public class CadastroActivity extends AppCompatActivity {
         }
         // Validação cadastro senha
         if(senha.equals(confirmarsenha)){
-            mensagem.setText("Acesso permitido");
+            Intent intent = new Intent(this, ProvaActivity.class);
+            startActivity(intent);
         }
         else{
             mensagem.setText("As senhas se diferem, tente novamente.");
