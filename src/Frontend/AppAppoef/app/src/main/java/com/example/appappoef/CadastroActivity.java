@@ -14,7 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-public class CadastroActivity extends AppCompatActivity {
+public class CadastroActivity extends AppCompatActivity implements LoginActivity.ILoginActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,10 @@ public class CadastroActivity extends AppCompatActivity {
             return;
         }
         if (senha.equals(confirmarsenha)) {
-            mensagem.setText("Acesso permitido");
+
+            CriarLogin(usuario, senha);
+            Intent intencao = new Intent(CadastroActivity.this, PrincipalActivity.class);
+            startActivity(intencao);
         } else {
             mensagem.setText("As senhas se diferem, tente novamente.");
         }
@@ -73,6 +76,7 @@ public class CadastroActivity extends AppCompatActivity {
         }
         // Validação cadastro senha
         if(senha.equals(confirmarsenha)){
+            CriarLogin(usuario, senha);
             Intent intent = new Intent(this, ProvaActivity.class);
             startActivity(intent);
         }
@@ -80,5 +84,11 @@ public class CadastroActivity extends AppCompatActivity {
             mensagem.setText("As senhas se diferem, tente novamente.");
         }
     }
+
+    @Override
+    public void CriarLogin(String u, String s) {
+
+    }
+
 
 }
