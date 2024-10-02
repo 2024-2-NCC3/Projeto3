@@ -1,0 +1,58 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0" version="24.7.17">
+  <diagram name="Página-1" id="f36nG3X-VWFxBDj-4ggA">
+    <mxGraphModel dx="872" dy="479" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="KUezBR62b_Fwe3HFxXNE-1" value="Login" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="68" y="6" width="175" height="142" as="geometry" />
+        </mxCell>
+        <mxCell id="KUezBR62b_Fwe3HFxXNE-2" value="- email: String&lt;div&gt;- senha: String&lt;/div&gt;&lt;div&gt;- naotenhoConta: Button&lt;/div&gt;&lt;div&gt;- entrar: Button&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="KUezBR62b_Fwe3HFxXNE-1" vertex="1">
+          <mxGeometry y="26" width="175" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="KUezBR62b_Fwe3HFxXNE-3" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="KUezBR62b_Fwe3HFxXNE-1" vertex="1">
+          <mxGeometry y="91" width="175" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="KUezBR62b_Fwe3HFxXNE-4" value="+ Entrar(): void&lt;div&gt;+ naoTenhoConta(): onClick&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="KUezBR62b_Fwe3HFxXNE-1" vertex="1">
+          <mxGeometry y="99" width="175" height="43" as="geometry" />
+        </mxCell>
+        <mxCell id="KUezBR62b_Fwe3HFxXNE-5" value="Cadastro" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="294" y="6" width="160" height="161" as="geometry" />
+        </mxCell>
+        <mxCell id="KUezBR62b_Fwe3HFxXNE-6" value="- email: String&lt;div&gt;- senha: String&lt;/div&gt;&lt;div&gt;- confirmarSenha: String&lt;/div&gt;&lt;div&gt;- criarConta: Button&lt;/div&gt;&lt;div&gt;- associar-se: Button&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="KUezBR62b_Fwe3HFxXNE-5" vertex="1">
+          <mxGeometry y="26" width="160" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="KUezBR62b_Fwe3HFxXNE-7" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="KUezBR62b_Fwe3HFxXNE-5" vertex="1">
+          <mxGeometry y="110" width="160" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="KUezBR62b_Fwe3HFxXNE-8" value="+ Entrar(): void&lt;div&gt;+ Associar(): void&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="KUezBR62b_Fwe3HFxXNE-5" vertex="1">
+          <mxGeometry y="118" width="160" height="43" as="geometry" />
+        </mxCell>
+        <mxCell id="eidQKW7rajAQqNiJBxTA-1" value="Home" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="498" y="6" width="175" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="eidQKW7rajAQqNiJBxTA-2" value="-&amp;nbsp; calendarView: Calendario&lt;div&gt;-&amp;nbsp; botoes: Button [ ]&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="eidQKW7rajAQqNiJBxTA-1" vertex="1">
+          <mxGeometry y="26" width="175" height="43" as="geometry" />
+        </mxCell>
+        <mxCell id="eidQKW7rajAQqNiJBxTA-3" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="eidQKW7rajAQqNiJBxTA-1" vertex="1">
+          <mxGeometry y="69" width="175" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="eidQKW7rajAQqNiJBxTA-4" value="+ onCreate&lt;span style=&quot;background-color: initial;&quot;&gt;()&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ onClickListener()&lt;/span&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="eidQKW7rajAQqNiJBxTA-1" vertex="1">
+          <mxGeometry y="77" width="175" height="43" as="geometry" />
+        </mxCell>
+        <mxCell id="eidQKW7rajAQqNiJBxTA-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;endArrow=none;endFill=0;" parent="1" source="eidQKW7rajAQqNiJBxTA-10" target="eidQKW7rajAQqNiJBxTA-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eidQKW7rajAQqNiJBxTA-10" value="Calendario" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="498" y="193" width="175" height="77" as="geometry" />
+        </mxCell>
+        <mxCell id="eidQKW7rajAQqNiJBxTA-12" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="eidQKW7rajAQqNiJBxTA-10" vertex="1">
+          <mxGeometry y="26" width="175" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="eidQKW7rajAQqNiJBxTA-13" value="+ getSelectedDate&lt;span style=&quot;background-color: initial;&quot;&gt;()&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ setDate()&lt;/span&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="eidQKW7rajAQqNiJBxTA-10" vertex="1">
+          <mxGeometry y="34" width="175" height="43" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
