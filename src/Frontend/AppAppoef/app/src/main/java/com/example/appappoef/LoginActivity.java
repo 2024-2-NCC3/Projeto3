@@ -33,9 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         TextInputEditText campoUsuario = findViewById(R.id.textInputEditTextUsuario);
         TextInputEditText campoSenha = findViewById(R.id.textInputEditTextSenha);
 
-
         TextView mensagem = findViewById(R.id.textMensagemErro);
-
 
         // extrai dos Objetos, recuperando a String que pompões:
         String usuario = campoUsuario.getText().toString();
@@ -45,6 +43,26 @@ public class LoginActivity extends AppCompatActivity {
         if(TextUtils.isEmpty(usuario) || TextUtils.isEmpty(senha)){
             mensagem.setText("Os campos usuário ou senha não pode estar vazios.");
             return;
+        }else {
+            mensagem.setText("Acesso permitido");
         }
+    }
+
+    public void NaoTenhoConta(View view){
+        // Instânciamento dos elementos Views do meu Arquivo XML;
+        TextInputEditText campoUsuario = findViewById(R.id.textInputEditTextUsuario);
+        TextInputEditText campoSenha = findViewById(R.id.textInputEditTextSenha);
+
+        TextView mensagem = findViewById(R.id.textMensagemErro);
+
+        // extrai dos Objetos, recuperando a String que pompões:
+        String usuario = campoUsuario.getText().toString();
+        String senha = campoSenha.getText().toString();
+
+        Intent intencao = new Intent(LoginActivity.this, CadastroActivity.class);
+        startActivity(intencao);
+        campoUsuario.setText("");
+        campoSenha.setText("");
+        mensagem.setText("");
     }
 }

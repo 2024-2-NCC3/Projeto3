@@ -5,8 +5,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".CadastroActivity">
 
+    <!-- Header APOEF -->
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
@@ -30,18 +31,61 @@
 
     <TextView
         android:id="@+id/textoTitulo"
-        android:layout_width="159dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:text="Cadastre-se"
         android:textAlignment="center"
-        android:textSize="40dp"
+        android:textSize="45dp"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.20" />
+        app:layout_constraintVertical_bias="0.17" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/textInputEditTextUsuario"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="E-mail"
+        android:inputType="text|textEmailAddress"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.30" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/textInputEditTextSenha"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Crie uma Senha:"
+        android:inputType="number|numberPassword"
+        android:minHeight="48dp"
+        android:onClick="Associar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.40" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/textInputEditTextConfirmarSenha"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Confirme a senha:"
+        android:inputType="number|numberPassword"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.50" />
 
     <TextView
         android:id="@+id/textMensagemErro"
@@ -54,23 +98,7 @@
         app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.55" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutUsuario"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints">
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutSenha"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints">
-
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintVertical_bias="0.60" />
 
     <Button
         android:id="@+id/btnInfEntrar"
@@ -78,7 +106,7 @@
         android:layout_height="48dp"
         android:backgroundTint="@color/azul_escuro"
         android:onClick="Entrar"
-        android:text="Entrar"
+        android:text="Criar Conta"
         android:textColor="@color/bege"
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -86,15 +114,15 @@
         app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.656" />
+        app:layout_constraintVertical_bias="0.70" />
 
     <Button
         android:id="@+id/btnNaoTenhoConta"
         android:layout_width="250dp"
         android:layout_height="48dp"
         android:backgroundTint="@color/azul_escuro"
-        android:onClick="NaoTenhConta"
-        android:text="Não tenho conta"
+        android:onClick="Associar"
+        android:text="Associe-se"
         android:textColor="@color/bege"
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -117,33 +145,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.90" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textInputEditTextSenha"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:hint="Senha"
-        android:inputType="number|numberPassword"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.50"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.45" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textInputEditTextUsuario"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:hint="E-mail"
-        android:inputType="text|textEmailAddress"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.50"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.35" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
