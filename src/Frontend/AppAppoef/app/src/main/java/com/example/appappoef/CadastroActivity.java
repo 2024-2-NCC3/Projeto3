@@ -77,7 +77,7 @@ public class CadastroActivity extends AppCompatActivity implements LoginActivity
         // Validação cadastro senha
         if(senha.equals(confirmarsenha)){
             CriarLogin(usuario, senha);
-            Intent intent = new Intent(this, ProvaActivity.class);
+            Intent intent = new Intent(this, InformacoesAssociacaoActivity.class);
             startActivity(intent);
         }
         else{
