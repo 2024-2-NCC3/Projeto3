@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InformacoesAssociacaoActivity">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textTitulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="\nINFORMAÇÕES SOBRE SER UM ASSOCIADO"
+                android:textAlignment="center"
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/textInformacoes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="
+\n\n1 - Interessados em se associar à APOEF devem realizar uma prova de 40 questões de múltipla escolha, com duração de 50 minutos. Para ser aprovado, é necessário acertar no mínimo 32 questões (80%).
+\n\n2 - Caso o candidato seja reprovado, poderá refazer a prova após 10 dias, mediante pagamento de R$ 20,00.
+\n\n3 – A prova abrange os seguintes temas:\n
+    - Gestão Financeira (Finanças Pessoais)\n
+    - Gestão de Riscos (Seguros)\n
+    - Gestão de Ativos (Investimentos)\n
+    - Planejamento Tributário (Impostos)\n
+    - Planejamento da Aposentadoria (Previdência)\n
+    - Planejamento Sucessório (Inventário)\n
+    - Matemática Financeira\n
+    - Economia\n
+    - Psicologia Econômica
+\n\n4 – O material de estudo está disponível no site da APOEF, na seção 'Quero me associar'.
+\n\n5 – Após ser aprovado, o candidato deverá preencher a ficha de associação e fornecer:\n
+    - Comprovante de residência dos últimos 60 dias
+    - Cópia de RG, CPF, CNH, ou documentos profissionais\n
+    - Foto para cadastro\n
+    - Currículo atualizado\n
+    - Projeto sobre Educação Financeira e um vídeo de até 3 minutos explicando o interesse em ser Educador em Finanças
+\n\n6 – O associado deve escolher a forma de pagamento da anuidade, renovável anualmente a partir da data de adesão.
+\n\n7 – Formas de pagamento da anuidade:\n
+    - PIX \n
+    - Boleto bancário\n
+    - Cartão de Crédito no total da anuidade\n
+    - Cartão de crédito (à vista ou em 2 parcelas)
+\n\n8 – O valor da anuidade em 2022 foi de R$ 150,00.
+\n\n9 – Após a confirmação do pagamento, o associado receberá a credencial de Educador em Finanças da APPOEF.
+\n\n10  – Todos os sócios têm acesso ao estatuto social da APOEF, disponível mediante solicitação na sede da associação."
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/espaco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+            <Button
+                android:id="@+id/btnRealizarProva"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/azul_escuro"
+                android:textColor="@color/bege"
+                android:textSize="20dp"
+                android:text="Realizar Prova" />
+
+            <Button
+                android:id="@+id/btnInfEntrar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/azul_escuro"
+                android:textColor="@color/bege"
+                android:textSize="20dp"
+                android:text="Entrar" />
+
+            <TextView
+                android:id="@+id/espaco1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

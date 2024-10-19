@@ -3,6 +3,7 @@ package com.example.appappoef;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,19 +31,19 @@ import java.util.ArrayList;
 public class ProvaActivity extends AppCompatActivity {
 
     private RequestQueue requestQueue;
-    private static final String URL_BUSCAR_DADOS = "https://z8vpqp-3000.csb.app/perguntasCadastradas";
-    TextView campoIdProva,campoQuestao, campoIdRespA, campoIdRespB, campoIdRespC, campoIdRespD, campoIdRespE, camppoRespCorreta;
-    RadioButton campoTextRespA, campoTextRespB, campoTextRespC, campoTextRespD, campoTextRespE;
+    private final String URL_BUSCAR_DADOS = "https://xm4tg7-3000.csb.app/randomPerguntas";
+    private TextView campoIdProva,campoQuestao, campoIdRespA, campoIdRespB, campoIdRespC, campoRespCorreta;
+    private TextView texTime, textNumTime;
+    private RadioButton campoTextRespA, campoTextRespB, campoTextRespC;
+    private Button btnProxima;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_prova);
-
-        // Requisição de rede
+// Requisição de rede
         requestQueue = Volley.newRequestQueue(this);
-
 
         // Instanciando objetos
         campoIdProva = findViewById(R.id.textIdProva);
@@ -53,11 +54,16 @@ public class ProvaActivity extends AppCompatActivity {
         campoTextRespB = findViewById(R.id.radioTextRespB);
         campoIdRespC = findViewById(R.id.textRespC);
         campoTextRespC = findViewById(R.id.radioTextRespC);
-        campoIdRespD = findViewById(R.id.textRespD);
-        campoTextRespD = findViewById(R.id.radioTextRespD);
-        campoIdRespE = findViewById(R.id.textRespE);
-        campoTextRespE = findViewById(R.id.radioTextRespE);
-        camppoRespCorreta = findViewById(R.id.RespCorreta);
+        campoRespCorreta = findViewById(R.id.RespCorreta);
+
+        texTime = findViewById(R.id.texTime);
+        textNumTime = findViewById(R.id.textNumTime);
+
+        btnProxima = findViewById(R.id.btnProxima);
+
+        btnProxima.setOnClickListener(view -> {
+            buscarDados();
+        });
 
         //chamar método
         buscarDados();
@@ -92,10 +98,6 @@ public class ProvaActivity extends AppCompatActivity {
                                 String textRespB = obj.getString("textRespB");
                                 String idRespC = obj.getString("idRespC");
                                 String textRespC = obj.getString("textRespC");
-                                String idRespD = obj.getString("idRespD");
-                                String textRespD = obj.getString("textRespD");
-                                String idRespE = obj.getString("idRespE");
-                                String textRespE = obj.getString("textRespE");
                                 String RespCorreta = obj.getString("RespCorreta");
 
                                 // Exibis dados
@@ -107,11 +109,30 @@ public class ProvaActivity extends AppCompatActivity {
                                 campoTextRespB.setText(textRespB);
                                 campoIdRespC.setText(idRespC);
                                 campoTextRespC.setText(textRespC);
-                                campoIdRespD.setText(idRespD);
-                                campoTextRespD.setText(textRespD);
-                                campoIdRespE.setText(idRespE);
-                                campoTextRespE.setText(textRespE);
-                                camppoRespCorreta.setText(RespCorreta);
+                                campoRespCorreta.setText(RespCorreta);
+
+                                // Comparar ids
+                                campoTextRespA.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                                    if(isChecked && RespCorreta.equals(idRespA)){
+                                        campoIdRespA.setVisibility(View.VISIBLE);
+                                    } else{
+                                        campoIdRespA.setVisibility(View.INVISIBLE);
+                                    }
+                                });
+                                campoTextRespB.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                                    if(isChecked && RespCorreta.equals(idRespB)){
+                                        campoIdRespB.setVisibility(View.VISIBLE);
+                                    } else{
+                                        campoIdRespB.setVisibility(View.INVISIBLE);
+                                    }
+                                });
+                                campoTextRespC.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                                    if(isChecked && RespCorreta.equals(idRespC)){
+                                        campoIdRespC.setVisibility(View.VISIBLE);
+                                    } else{
+                                        campoIdRespC.setVisibility(View.INVISIBLE);
+                                    }
+                                });
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -130,11 +151,5 @@ public class ProvaActivity extends AppCompatActivity {
         );
         // Requisição à fila
         requestQueue.add(jsonArrayRequest);
-    }
-
-    public void CadastrarPergunta(View view){
-
-        // Extratindo inorações
-
     }
 }

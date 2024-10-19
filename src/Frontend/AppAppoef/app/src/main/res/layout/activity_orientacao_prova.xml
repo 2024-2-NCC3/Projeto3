@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OrientacaoProvaActivity">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/espaco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/textOrientacaoProva"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sejam muito bem-vindos à nossa prova online! Estamos felizes por vocês estarem aqui e prontos para mostrar todo o conhecimento adquirido. Antes de começarmos, gostaria de compartilhar algumas orientações para que tudo ocorra da melhor forma possível:
+        \nNome da Prova: APOEF
+        \nData e Hora:
+        \nDuração: 50min
+        \nPlataforma: aplicativo Apoef
+        \n\nInstruções de Acesso: Após iniciar a prova não poderá parar
+        \n\nEquipamentos:
+        \n - Celular ou tablet com acesso à internet
+        \n - Carregador ou bateria suficiente
+        \n\nPreparação
+        \n - Revisão,
+        \n - Revise os tópicos principais que serão abordados,
+        \n - Faça exercícios sobre os temas relevantes,
+        \nDicas Práticas
+        \n\nEscolha um lugar silencioso e sem distrações
+        \n - Leitura Atenta;
+        \n - Leia todas as instruções antes de começar;
+        \n - Gerenciamento do Tempo;
+        \n - Controle o tempo disponível para cada questão;
+        \n - Manutenção da Calma;
+
+        \n\nLembrem-se de revisar suas respostas antes de enviar.
+        \nVocês receberão feedback sobre o desempenho em breve.
+        \nEstamos aqui para apoiar vocês, e acreditamos que todos darão o melhor de si. Boa sorte a todos!
+        \n\nVamos começar!
+        "
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/espaco1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+            <Button
+                android:id="@+id/btnIniciarProva"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/azul_escuro"
+                android:onClick="IniciarProva"
+                android:text="Iniciar Prova"
+                android:textColor="@color/bege"
+                android:textSize="20dp" />
+
+            <Button
+                android:id="@+id/btnOrientVoltar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Voltar"
+                android:backgroundTint="@color/azul_escuro"
+                android:textColor="@color/bege"
+                android:textSize="20dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
