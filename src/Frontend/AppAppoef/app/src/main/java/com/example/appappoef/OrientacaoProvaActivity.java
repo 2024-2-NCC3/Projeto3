@@ -28,6 +28,7 @@ public class OrientacaoProvaActivity extends AppCompatActivity {
         btnIniciarProva.setOnClickListener(view -> {
             Intent intent = new Intent(this, ProvaActivity.class);
             startActivity(intent);
+
         });
 
         btnOrientVoltar.setOnClickListener(view -> {
@@ -41,4 +42,5 @@ public class OrientacaoProvaActivity extends AppCompatActivity {
             return insets;
         });
     }
+
 }
