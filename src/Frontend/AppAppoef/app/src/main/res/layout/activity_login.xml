@@ -7,16 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
+    <!-- Header APOEF -->
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@color/azul_escuro"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
         android:padding="16dp"
         android:text="APPOEF"
         android:textAlignment="center"
-        android:gravity="center"
-        android:fontFamily="sans-serif-black"
         android:textColor="#FFFFFF"
         android:textSize="40sp"
         android:textStyle="bold"
@@ -32,10 +33,10 @@
         android:id="@+id/textoTitulo"
         android:layout_width="159dp"
         android:layout_height="wrap_content"
+        android:onClick="Login"
         android:text="Login"
         android:textAlignment="center"
         android:textSize="40dp"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.50"
@@ -47,14 +48,14 @@
         android:id="@+id/textMensagemErro"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:padding="15dp"
+        android:padding="12dp"
         android:textColor="@color/vermelho_erro"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.55" />
+        app:layout_constraintVertical_bias="0.49" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutUsuario"
@@ -77,16 +78,16 @@
         android:layout_width="250dp"
         android:layout_height="48dp"
         android:backgroundTint="@color/azul_escuro"
-        android:onClick="Entrar"
+        android:onClick="autenticarLogin"
         android:text="Entrar"
         android:textColor="@color/bege"
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.656" />
+        app:layout_constraintVertical_bias="0.647" />
 
     <Button
         android:id="@+id/btnNaoTenhoConta"
@@ -99,9 +100,10 @@
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.78" />
+        app:layout_constraintVertical_bias="0.755" />
 
     <TextView
         android:id="@+id/TextEsqSenha"
@@ -113,24 +115,23 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.90" />
+        app:layout_constraintVertical_bias="0.859" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/textInputEditTextSenha"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:hint="Senha"
-        android:inputType="number|numberPassword"
+        android:inputType="text|textPassword"
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.45" />
+        app:layout_constraintVertical_bias="0.434" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/textInputEditTextUsuario"
@@ -141,9 +142,10 @@
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.35" />
+        app:layout_constraintVertical_bias="0.347" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.example.appappoef;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -19,14 +20,19 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.appappoef.databinding.ActivityCadastroBinding;
+import com.google.android.material.textfield.TextInputEditText;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 public class LoginActivity extends AppCompatActivity {
 
-    private TextView campoUsuario, campoSenha, mensagem;
+    private TextInputEditText campoUsuario, campoSenha;
+    private TextView mensagem;
     private RequestQueue requestQueue;
-    private final String url = "https://z8vpqp-3000.csb.app/criarLogin";
+    private String url = "https://7nzcxx-3000.csb.app/usuariosCadastrados";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,43 +54,73 @@ public class LoginActivity extends AppCompatActivity {
             return insets;
         });
     }
-    public void Entrar(View view){
-        // extrai dos Objetos, recuperando a String que pompões:
+    public void Login(View view){
+
+        // extrai dos Objetos
         String usuario = campoUsuario.getText().toString();
         String senha = campoSenha.getText().toString();
-        // Validar dados
-        if (TextUtils.isEmpty(usuario) || TextUtils.isEmpty(senha)) {
-            mensagem.setText("Os campos usuário ou senha não podem estar vazios.");
+
+
+        // Validação de senha e usuario
+        if(TextUtils.isEmpty(usuario) || TextUtils.isEmpty(senha)){
+            mensagem.setText("Os campos de usuário e senha não podem estar vazios.");
             return;
+
         }
-            CriarLogin(usuario, senha);
-            Intent intencao = new Intent(LoginActivity.this, PrincipalActivity.class);
-            startActivity(intencao);
+        autenticarLogin(usuario, senha);
+
     }
     public void NaoTenhoConta(View view) {
-
-        // Mudar para Tela Cadastro
-        Intent intencao = new Intent(LoginActivity.this, CadastroActivity.class);
+        // Mudar para Tela de Cadastro
+        Intent intencao = new Intent(this, CadastroActivity.class);
         startActivity(intencao);
-
+        LimparCampos();
     }
-    public void CriarLogin(String usuario, String senha){
+
+    //mudar para get
+    public void autenticarLogin( String usuario,String senha ){
+
+
+        // extrair dos Objetos
+        usuario = campoUsuario.getText().toString();
+        senha = campoSenha.getText().toString();
+
         // criando Json para enviar dados
         JSONObject obj = new JSONObject();
         try{
             obj.put("usuario", usuario);
             obj.put("senha", senha);
 
-        } catch(JSONException e){
+        } catch(JSONException e) {
             e.printStackTrace();
-            Toast.makeText(this, "Erro ao criar O JSON " , Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Erro ao criar O JSON ", Toast.LENGTH_SHORT).show();
             return;
         }
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, obj, response -> {
-            Toast.makeText(LoginActivity.this, "Login cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
 
-        },
-                error -> {
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, obj, response -> {
+
+            try{
+              String token = response.getString("token");
+              // armazenar os tokens
+                SharedPreferences sharedPreferences = getSharedPreferences("armazeArq", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("token_teste", token); // Salvar o token
+                editor.apply(); // Aplicar mudanças
+                Toast.makeText(LoginActivity.this, "Login cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+                // Navegar para a tela principal após o login bem-sucedido
+                Intent intent = new Intent(LoginActivity.this,PrincipalActivity.class);
+                startActivity(intent);
+                LimparCampos();
+
+            }catch (JSONException e){
+                e.printStackTrace();
+                Toast.makeText(this, "usuario ou senha invalidos! Tente novamente", Toast.LENGTH_SHORT).show();
+
+
+            }
+
+        }, error -> {
                     if(error.networkResponse != null){
                         Log.e("Volley", "Erro na requisição: " + new String(error.networkResponse.data));
                     }
@@ -92,14 +128,10 @@ public class LoginActivity extends AppCompatActivity {
         );
         // adicionar requisição a fila
         requestQueue.add(jsonObjectRequest);
-
-        //Limpar dados
-        campoUsuario.setText("");
+    }
+    public void LimparCampos(){
         campoSenha.setText("");
         mensagem.setText("");
-    }
-    public interface ILoginActivity{
-        void CriarLogin(String u, String s);
     }
 
 }
