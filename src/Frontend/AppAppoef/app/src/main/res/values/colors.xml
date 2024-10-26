@@ -5,6 +5,8 @@
     <color name="azul_2">#2C9CD7</color>
     <color name="azul_3">#2E5A72</color>
     <color name="azul_4">#ABE0F0</color>
+    <color name="azul_escuro">#0000FF</color> <!-- Exemplo de código hexadecimal -->
+    <color name="bege">#F5F5DC</color>
 
     <!-- Outras Cores -->
     <color name="vermelho_erro">#C30010</color>
