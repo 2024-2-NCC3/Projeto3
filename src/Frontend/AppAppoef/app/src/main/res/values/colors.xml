@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Cores APOEF -->
-    <color name="azul_marinho">#084D8C</color>
-    <color name="azul_turquesa">#0589AE</color>
-    <color name="azul_escuro">#113F6F</color>
-    <color name="bege">#FEF8E6</color>
+    <color name="azul_1">#117CB2</color>
+    <color name="azul_2">#2C9CD7</color>
+    <color name="azul_3">#2E5A72</color>
+    <color name="azul_4">#ABE0F0</color>
 
     <!-- Outras Cores -->
     <color name="vermelho_erro">#C30010</color>
+    <color name="branco">#FFFFFF</color>
 </resources>

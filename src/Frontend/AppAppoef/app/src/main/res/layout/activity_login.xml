@@ -5,9 +5,10 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity"
+    android:background="@drawable/background_login">
 
-    <TextView
+    <!-- <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="100dp"
@@ -25,24 +26,68 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0" /> -->
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.10"
+        app:srcCompat="@drawable/appoef_logo_1" />
 
 
     <TextView
         android:id="@+id/textoTitulo"
-        android:layout_width="159dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_bold"
         android:text="Login"
-        android:textAlignment="center"
-        android:textSize="40dp"
+        android:textSize="35sp"
+        android:textColor="@color/branco"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.45" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/textInputEditTextUsuario"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="E-mail"
+        android:inputType="text|textEmailAddress"
+        android:minHeight="48dp"
+        android:background="@color/azul_4"
+        android:textColorHint="@color/branco"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.20" />
+        app:layout_constraintVertical_bias="0.55" />
 
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/textInputEditTextSenha"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Senha"
+        android:inputType="number|numberPassword"
+        android:minHeight="48dp"
+        android:background="@color/azul_4"
+        android:textColorHint="@color/branco"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.65" />
     <TextView
         android:id="@+id/textMensagemErro"
         android:layout_width="300dp"
@@ -54,7 +99,7 @@
         app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.55" />
+        app:layout_constraintVertical_bias="0.75" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutUsuario"
@@ -74,36 +119,38 @@
 
     <Button
         android:id="@+id/btnInfEntrar"
-        android:layout_width="250dp"
-        android:layout_height="48dp"
-        android:backgroundTint="@color/azul_escuro"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:backgroundTint="@color/branco"
+        android:fontFamily="@font/inter_bold"
+        android:textColor="@color/azul_1"
+        android:textSize="15dp"
         android:onClick="Entrar"
         android:text="Entrar"
-        android:textColor="@color/bege"
-        android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.656" />
+        app:layout_constraintVertical_bias="0.82" />
 
     <Button
         android:id="@+id/btnNaoTenhoConta"
-        android:layout_width="250dp"
-        android:layout_height="48dp"
-        android:backgroundTint="@color/azul_escuro"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
         android:onClick="NaoTenhoConta"
         android:text="Não tenho conta"
-        android:textColor="@color/bege"
-        android:textSize="25dp"
+        android:backgroundTint="@color/branco"
+        android:fontFamily="@font/inter_bold"
+        android:textColor="@color/azul_1"
+        android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.78" />
+        app:layout_constraintVertical_bias="0.89" />
 
-    <TextView
+    <!-- <TextView
         android:id="@+id/TextEsqSenha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -116,34 +163,7 @@
         app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.90" />
+        app:layout_constraintVertical_bias="0.90" /> -->
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textInputEditTextSenha"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:hint="Senha"
-        android:inputType="number|numberPassword"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.50"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.45" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textInputEditTextUsuario"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:hint="E-mail"
-        android:inputType="text|textEmailAddress"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.50"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.35" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
