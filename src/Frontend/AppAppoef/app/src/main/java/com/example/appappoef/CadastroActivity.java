@@ -56,35 +56,6 @@ public class CadastroActivity extends AppCompatActivity implements LoginActivity
         }
     }
 
-    public void Associar(View view){
-        // Instânciamento dos elementos Views do meu Arquivo XML;
-        TextInputEditText campoUsuario = findViewById(R.id.textInputEditTextUsuario);
-        TextInputEditText campoSenha = findViewById(R.id.textInputEditTextSenha);
-        TextInputEditText campoConfirmarSenha = findViewById(R.id.textInputEditTextConfirmarSenha);
-
-        TextView mensagem = findViewById(R.id.textMensagemErro);
-
-        // extrai dos Objetos, recuperando a String que pompões:
-        String usuario = campoUsuario.getText().toString();
-        String senha = campoSenha.getText().toString();
-        String confirmarsenha = campoConfirmarSenha.getText().toString();
-
-        // Validação entrada zerada
-        if(TextUtils.isEmpty(usuario) || TextUtils.isEmpty(senha) || TextUtils.isEmpty(confirmarsenha)){
-            mensagem.setText("Os campos usuário ou senha não pode estar vazios.");
-            return;
-        }
-        // Validação cadastro senha
-        if(senha.equals(confirmarsenha)){
-            CriarLogin(usuario, senha);
-            Intent intent = new Intent(this, InformacoesAssociacaoActivity.class);
-            startActivity(intent);
-        }
-        else{
-            mensagem.setText("As senhas se diferem, tente novamente.");
-        }
-    }
-
     @Override
     public void CriarLogin(String u, String s) {
 

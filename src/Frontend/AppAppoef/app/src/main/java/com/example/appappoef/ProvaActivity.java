@@ -44,8 +44,6 @@ public class ProvaActivity extends AppCompatActivity {
     private JSONArray questoes;
     private CountDownTimer timer;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -218,7 +216,7 @@ public class ProvaActivity extends AppCompatActivity {
                 textNumTempoQ.setText("Fim!");
                 avancarQuestoes();
             }
-        }.start();
+        };
     }
 
 }
