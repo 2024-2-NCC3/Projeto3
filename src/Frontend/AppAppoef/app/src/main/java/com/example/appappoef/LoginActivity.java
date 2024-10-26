@@ -25,6 +25,7 @@ import org.json.JSONObject;
 public class LoginActivity extends AppCompatActivity {
 
     private TextView campoUsuario, campoSenha, mensagem;
+
     private RequestQueue requestQueue;
     private final String url = "https://z8vpqp-3000.csb.app/criarLogin";
 
@@ -55,51 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         // Validar dados
         if (TextUtils.isEmpty(usuario) || TextUtils.isEmpty(senha)) {
             mensagem.setText("Os campos usuário ou senha não podem estar vazios.");
-            return;
-        }
-            CriarLogin(usuario, senha);
-            Intent intencao = new Intent(LoginActivity.this, PrincipalActivity.class);
-            startActivity(intencao);
-    }
-    public void NaoTenhoConta(View view) {
 
-        // Mudar para Tela Cadastro
-        Intent intencao = new Intent(LoginActivity.this, CadastroActivity.class);
-        startActivity(intencao);
-
-    }
-    public void CriarLogin(String usuario, String senha){
-        // criando Json para enviar dados
-        JSONObject obj = new JSONObject();
-        try{
-            obj.put("usuario", usuario);
-            obj.put("senha", senha);
-
-        } catch(JSONException e){
-            e.printStackTrace();
-            Toast.makeText(this, "Erro ao criar O JSON " , Toast.LENGTH_SHORT).show();
-            return;
-        }
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, obj, response -> {
-            Toast.makeText(LoginActivity.this, "Login cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
-
-        },
-                error -> {
-                    if(error.networkResponse != null){
-                        Log.e("Volley", "Erro na requisição: " + new String(error.networkResponse.data));
-                    }
-                }
-        );
-        // adicionar requisição a fila
-        requestQueue.add(jsonObjectRequest);
-
-        //Limpar dados
-        campoUsuario.setText("");
-        campoSenha.setText("");
-        mensagem.setText("");
-    }
-    public interface ILoginActivity{
-        void CriarLogin(String u, String s);
-    }
+        }}
 
 }

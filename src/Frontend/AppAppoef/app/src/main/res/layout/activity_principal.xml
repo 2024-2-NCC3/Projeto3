@@ -54,7 +54,6 @@
         android:layout_height="50dp"
         android:text="Editar"
         android:textSize="15sp"
-        android:backgroundTint="@color/azul_turquesa"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.80"
