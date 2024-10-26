@@ -2,6 +2,7 @@
 var sqlite3 = require("sqlite3").verbose();
 var caminhoBanco = "BancoDadosAppoef.db";
 var banco = new sqlite3.Database(caminhoBanco);
+
 // metodos da Prova
 function postCadastrarPergunta(req, res) {
   let Questao = req.body.Questao;
