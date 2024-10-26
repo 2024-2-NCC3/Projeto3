@@ -1,19 +1,22 @@
-var express = require("express");
-var app = express();
-var port = process.env.PORT || 3000;
-
+var express = require("express"); // carrega o servidor em uma variável
+var app = express(); // biblioteca express - variável com a função express
+var port = process.env.PORT || 3000; // Porta alterada para 3001
+// conexão web
 var bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
+// Banco de dados
+//verbose comandos na biblioteca sqlite
 var sqlite3 = require("sqlite3").verbose();
-var caminhoBanco = "BancoDadosAppoef.db";
+var caminhoBanco = "BancoDadosAppoef.db"; //variável recebe o caminho
 var banco = new sqlite3.Database(caminhoBanco);
 
 app.get("/", function (req, res) {
   res.send("Agora foi");
 });
+
 app.listen(port, () => {
   //comando que permite o node escutar os dados que estão sendo enviados
   console.log("Servidor rodando!" + port);
@@ -43,7 +46,7 @@ app.post("/criarLogin", function (req, res) {
     }
   );
 });
-// Visializar cadastros
+// Visualizar cadastros
 app.get("/usuariosCadastrados", function (req, res) {
   banco.all(`SELECT * FROM Login`, [], (err, rows) => {
     if (err) {
