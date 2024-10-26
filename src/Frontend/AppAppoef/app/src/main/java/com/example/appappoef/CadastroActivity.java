@@ -3,6 +3,7 @@ package com.example.appappoef;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.TextView;
 
@@ -14,9 +15,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-public class CadastroActivity extends AppCompatActivity implements LoginActivity.ILoginActivity {
+public class CadastroActivity extends AppCompatActivity {
     private String emojierro;
-    private TextView campoUsuario, campoSenha, mensagem;
+    TextView campoUsuario, campoSenha, mensagem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,51 +62,46 @@ public class CadastroActivity extends AppCompatActivity implements LoginActivity
         }
         if(senha.length() < 6  ){
 
-            validQtdCarac.setText(emojierro + " É necessário que a senha contenha 6 dígitos.");
-            LimparCampos();
+           mensagem.setText(emojierro + " É necessário que a senha contenha 6 dígitos.");
             return;
         }
         if(!senha.matches(".*[!@#&*$/;~^+_-].*")){
-            validCaracEspecial.setText(emojierro + " É necessário que a senha contenha um caractere especial.");
-            LimparCampos();
+            mensagem.setText(emojierro + " É necessário que a senha contenha um caractere especial.");
             return;
         }
         if(!senha.matches(".*[A-Z].*")){
-            validLetraMaius.setText(emojierro +" É necessário que a senha contenha uma letra maiúscula.");
-            LimparCampos();
+            mensagem.setText(emojierro +" É necessário que a senha contenha uma letra maiúscula.");
             return;
         }
         if(!senha.matches(".*[a-z].*")){
-            validLetraMinusc.setText(emojierro + " É necessário que a senha contenha uma letra minúscula.");
+           mensagem.setText(emojierro + " É necessário que a senha contenha uma letra minúscula.");
             return;
         }
         if(!senha.matches(".*[0-9].*")){
-            validNum.setText(emojierro +" É necessário que a senha contenha um número.");
+           mensagem.setText(emojierro +" É necessário que a senha contenha um número.");
             return;
         }
-        CriarLogin();
-        Intent intent = new Intent(this, PrincipalActivity.class);
-        startActivity(intent);
-        LimparCampos();
-    }
-    // criaçaõ de elementos no layout para acompnhar em tempo real a verificação do usuario e senha
-    private boolean isValidEmail(String usuario) {
-        return usuario != null && Patterns.EMAIL_ADDRESS.matcher(usuario).matches();
-    };
-
         if (!senha.equals(confirmarsenha)) {
             mensagem.setText("As senhas não são iguais! Tente novamente.");
             return;
 
-        } CriarLogin(usuario, senha);
-        Intent intencao = new Intent(CadastroActivity.this, PrincipalActivity.class);
-        startActivity(intencao);
-    }
-
-    @Override
-    public void CriarLogin(String u, String s) {
+        }
+        CriarLogin();
+        Intent intent = new Intent(this, PrincipalActivity.class);
+        startActivity(intent);
 
     }
+    // criaçaõ de elementos no layout para acompnhar em tempo real a verificação do usuario e senha
+    private boolean isValidEmail(String usuario) {
+        return usuario != null && Patterns.EMAIL_ADDRESS.matcher(usuario).matches();
+    }
 
+    public void CriarLogin() {
 
+    }
 }
+
+
+
+
+
