@@ -116,21 +116,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.70" />
 
-    <Button
-        android:id="@+id/btnNaoTenhoConta"
-        android:layout_width="250dp"
-        android:layout_height="48dp"
-        android:backgroundTint="@color/azul_escuro"
-        android:onClick="Associar"
-        android:text="Associe-se"
-        android:textColor="@color/bege"
-        android:textSize="25dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.78" />
-
     <TextView
         android:id="@+id/TextEsqSenha"
         android:layout_width="wrap_content"
