@@ -8,25 +8,6 @@
     tools:context=".CadastroActivity">
 
     <!-- Header APOEF -->
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@color/azul_escuro"
-        android:padding="16dp"
-        android:text="APPOEF"
-        android:textAlignment="center"
-        android:gravity="center"
-        android:fontFamily="sans-serif-black"
-        android:textColor="#FFFFFF"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
 
 
     <TextView
@@ -36,56 +17,82 @@
         android:text="Cadastre-se"
         android:textAlignment="center"
         android:textSize="45dp"
+        android:textColor="@color/material_dynamic_secondary70"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintHorizontal_bias="0.422"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.17" />
+        app:layout_constraintVertical_bias="0.317" />
+
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/textInputEditTextNomeUsuario"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@color/azul_4"
+        android:hint="Nome de Usuario"
+        android:inputType="text|textPersonName"
+        android:minHeight="48dp"
+        android:textColorHint="@color/branco"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.424" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/textInputEditTextUsuario"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:background="@color/azul_4"
         android:hint="E-mail"
         android:inputType="text|textEmailAddress"
         android:minHeight="48dp"
+        android:textColorHint="@color/branco"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.30" />
+        app:layout_constraintVertical_bias="0.513" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/textInputEditTextSenha"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:background="@color/azul_4"
         android:hint="Crie uma Senha:"
-        android:inputType="number|numberPassword"
+        android:inputType="text|textPassword"
         android:minHeight="48dp"
         android:onClick="Associar"
+
+        android:textColorHint="@color/branco"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.40" />
+        app:layout_constraintVertical_bias="0.604" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/textInputEditTextConfirmarSenha"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:background="@color/azul_4"
         android:hint="Confirme a senha:"
-        android:inputType="number|numberPassword"
+        android:inputType="text|textPassword"
         android:minHeight="48dp"
+        android:textColorHint="@color/branco"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.50" />
+        app:layout_constraintVertical_bias="0.695" />
 
     <TextView
         android:id="@+id/textMensagemErro"
@@ -95,26 +102,26 @@
         android:textColor="@color/vermelho_erro"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.60" />
+        app:layout_constraintVertical_bias="0.788" />
 
     <Button
         android:id="@+id/btnInfEntrar"
         android:layout_width="250dp"
         android:layout_height="48dp"
-        android:backgroundTint="@color/azul_escuro"
+        android:backgroundTint="@color/azul_2"
         android:onClick="Entrar"
         android:text="Criar Conta"
         android:textColor="@color/bege"
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.70" />
+        app:layout_constraintVertical_bias="0.888" />
 
     <TextView
         android:id="@+id/TextEsqSenha"
@@ -122,13 +129,37 @@
         android:layout_height="wrap_content"
         android:text="Esqueci a senha"
         android:textAlignment="center"
+        android:textColor="@color/material_dynamic_secondary70"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.90" />
+        app:layout_constraintVertical_bias="0.95" />
+
+    <TextView
+        android:id="@+id/textParteAzul"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/azul_1"
+        android:textColor="@color/azul_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/logoImage"
+        android:layout_width="400dp"
+        android:layout_height="150dp"
+        android:src="@drawable/appoef_logo_2"
+        app:layout_constraintBottom_toBottomOf="@id/textParteAzul"
+        app:layout_constraintEnd_toEndOf="@id/textParteAzul"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/textParteAzul"
+        app:layout_constraintTop_toTopOf="@id/textParteAzul"
+        app:layout_constraintVertical_bias="1.0" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
