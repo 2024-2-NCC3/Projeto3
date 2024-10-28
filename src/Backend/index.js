@@ -22,6 +22,12 @@ app.listen(port, () => {
   console.log("Servidor rodando!" + port);
 });
 
+// chama metodos de Calendario
+let calendario = require("./calendario");
+app.post("/cadastrarEvento", calendario.postCadastrarEvento);
+app.post("/deletarEvento", calendario.postDeletarEvento);
+app.get("/eventosCadastrados", calendario.getEventosCadastrados);
+
 // chama metodos de prova.js
 let prova = require("./prova");
 app.post("/cadastrarPergunta", prova.postCadastrarPergunta);
