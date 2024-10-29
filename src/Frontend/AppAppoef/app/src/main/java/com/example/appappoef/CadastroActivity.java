@@ -3,9 +3,11 @@ package com.example.appappoef;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,11 +15,19 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.material.textfield.TextInputEditText;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class CadastroActivity extends AppCompatActivity {
     private String emojierro;
     TextView campoUsuario, campoSenha, mensagem;
+    private RequestQueue requestQueue;
+    private final String url = "https://7nzcxx-3000.csb.app/cadastrarUsuario";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +97,7 @@ public class CadastroActivity extends AppCompatActivity {
 
         }
         CriarLogin();
-        Intent intent = new Intent(this, PrincipalActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
 
     }
@@ -98,8 +108,37 @@ public class CadastroActivity extends AppCompatActivity {
 
     public void CriarLogin() {
 
+        // extrai dos Objetos, recuperando a String que pompões:
+        String usuario = campoUsuario.getText().toString();
+        String senha = campoSenha.getText().toString();
+
+        // criando Json para enviar dados
+        JSONObject obj = new JSONObject();
+        try{
+            obj.put("usuario", usuario);
+            obj.put("senha", senha);
+
+        } catch(JSONException e){
+            e.printStackTrace();
+            Toast.makeText(this, "Erro ao criar O JSON " , Toast.LENGTH_SHORT).show();
+            return;
+        }
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, obj, response -> {
+            Toast.makeText(CadastroActivity.this, "Cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+
+        },
+                error -> {
+                    if(error.networkResponse != null){
+                        Log.e("Volley", "Erro na requisição: " + new String(error.networkResponse.data));
+                    }
+                }
+        );
+        // adicionar requisição a fila
+        requestQueue.add(jsonObjectRequest);
     }
-}
+
+    }
+
 
 
 
