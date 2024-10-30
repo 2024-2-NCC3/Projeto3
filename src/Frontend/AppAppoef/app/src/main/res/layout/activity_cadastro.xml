@@ -5,112 +5,133 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CadastroActivity">
+    tools:context=".CadastroActivity"
+    android:background="@drawable/background_cadastro">
 
-    <!-- Header APOEF -->
 
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/background_cadastro" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="400dp"
+        android:layout_height="150dp"
+        app:srcCompat="@drawable/appoef_logo_2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.10" />
 
     <TextView
         android:id="@+id/textoTitulo"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_bold"
         android:text="Cadastre-se"
         android:textAlignment="center"
-        android:textSize="45dp"
-        android:textColor="@color/material_dynamic_secondary70"
-
+        android:textColor="@color/azul_2"
+        android:textSize="35dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.422"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.317" />
+        app:layout_constraintVertical_bias="0.364" />
 
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textInputEditTextNomeUsuario"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutNomeUsuario"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:background="@color/azul_4"
-        android:hint="Nome de Usuario"
-        android:inputType="text|textPersonName"
-        android:minHeight="48dp"
-        android:textColorHint="@color/branco"
-
+        android:textColorHint="@color/azul_1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.424" />
+        app:layout_constraintVertical_bias="0.449">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textInputEditTextUsuario"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditNomeUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/azul_4"
+            android:hint="Nome de Usuario"
+            android:inputType="text|textPersonName"
+            android:minHeight="48dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutEmailL"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:background="@color/azul_4"
-        android:hint="E-mail"
-        android:inputType="text|textEmailAddress"
-        android:minHeight="48dp"
-        android:textColorHint="@color/branco"
+        android:textColorHint="@color/azul_1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.513" />
+        app:layout_constraintVertical_bias="0.545">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textInputEditTextSenha"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:background="@color/azul_4"
-        android:hint="Crie uma Senha:"
-        android:inputType="text|textPassword"
-        android:minHeight="48dp"
-        android:onClick="Associar"
-
-        android:textColorHint="@color/branco"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.604" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textInputEditTextConfirmarSenha"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:background="@color/azul_4"
-        android:hint="Confirme a senha:"
-        android:inputType="text|textPassword"
-        android:minHeight="48dp"
-        android:textColorHint="@color/branco"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.695" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/azul_4"
+            android:hint="E-mail"
+            android:inputType="text|textEmailAddress"
+            android:minHeight="48dp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/textMensagemErro"
-        android:layout_width="300dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="15dp"
+        android:padding="15sp"
+        android:text=""
         android:textColor="@color/vermelho_erro"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.788" />
+        app:layout_constraintVertical_bias="0.82" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutCriarSenha"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/azul_1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.644">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditCriarSenha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/azul_4"
+            android:hint="Crie uma Senha:"
+            android:inputType="text|textPassword"
+            android:minHeight="48dp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btnInfEntrar"
-        android:layout_width="250dp"
-        android:layout_height="48dp"
+        android:id="@+id/btnEntrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:backgroundTint="@color/azul_2"
         android:onClick="Entrar"
         android:text="Criar Conta"
@@ -118,48 +139,34 @@
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.888" />
+        app:layout_constraintVertical_bias="0.897" />
 
-    <TextView
-        android:id="@+id/TextEsqSenha"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutConfirmarSenha"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="Esqueci a senha"
-        android:textAlignment="center"
-        android:textColor="@color/material_dynamic_secondary70"
-        android:textSize="20dp"
-        android:textStyle="bold"
+        android:textColorHint="@color/azul_1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95" />
+        app:layout_constraintVertical_bias="0.743">
 
-    <TextView
-        android:id="@+id/textParteAzul"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@color/azul_1"
-        android:textColor="@color/azul_1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/logoImage"
-        android:layout_width="400dp"
-        android:layout_height="150dp"
-        android:src="@drawable/appoef_logo_2"
-        app:layout_constraintBottom_toBottomOf="@id/textParteAzul"
-        app:layout_constraintEnd_toEndOf="@id/textParteAzul"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/textParteAzul"
-        app:layout_constraintTop_toTopOf="@id/textParteAzul"
-        app:layout_constraintVertical_bias="1.0" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditConfirmarSenha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/azul_4"
+            android:hint="Confirme a senha:"
+            android:inputType="text|textPassword"
+            android:minHeight="48dp"
+            tools:layout_editor_absoluteX="47dp"
+            tools:layout_editor_absoluteY="592dp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

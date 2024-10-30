@@ -18,16 +18,17 @@ import androidx.core.view.WindowInsetsCompat;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.android.material.textfield.TextInputEditText;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class CadastroActivity extends AppCompatActivity {
+
     private String emojierro;
-    TextView campoUsuario, campoSenha, mensagem;
+    private TextView campoNomeUsuario, campoUsuario, campoSenha, campoConfirmarSenha, mensagem;
     private RequestQueue requestQueue;
-    private final String url = "https://7nzcxx-3000.csb.app/cadastrarUsuario";
+    private final String url = "https://h4592k-3000.csb.app/cadastrarUsuario";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +37,12 @@ public class CadastroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro);
 
         emojierro = getString(R.string.emojierror);
-        campoUsuario = findViewById(R.id.textInputEditTextUsuario);
-        campoSenha = findViewById(R.id.textInputEditTextSenha);
+        campoNomeUsuario = findViewById(R.id.textInputEditNomeUsuario);
+        campoUsuario = findViewById(R.id.textInputEditEmail);
+        campoSenha = findViewById(R.id.textInputEditCriarSenha);
+        campoConfirmarSenha = findViewById(R.id.textInputEditConfirmarSenha);
         mensagem = findViewById(R.id.textMensagemErro);
+        requestQueue = Volley.newRequestQueue(this);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -46,32 +50,21 @@ public class CadastroActivity extends AppCompatActivity {
             return insets;
         });
     }
-
     public void Entrar(View view) {
-        // Instânciamento dos elementos Views do meu Arquivo XML;
-        TextInputEditText campoUsuario = findViewById(R.id.textInputEditTextUsuario);
-        TextInputEditText campoSenha = findViewById(R.id.textInputEditTextSenha);
-        TextInputEditText campoConfirmarSenha = findViewById(R.id.textInputEditTextConfirmarSenha);
-
-        TextView mensagem = findViewById(R.id.textMensagemErro);
-
         // extrai dos Objetos, recuperando a String que pompões:
         String usuario = campoUsuario.getText().toString();
         String senha = campoSenha.getText().toString();
         String confirmarsenha = campoConfirmarSenha.getText().toString();
-
         // VALIDAÇÃO ENTRADA ZERADA
         if (TextUtils.isEmpty(usuario) || TextUtils.isEmpty(senha) || TextUtils.isEmpty(confirmarsenha)) {
             mensagem.setText("Os campos usuário ou senha não pode estar vazios.");
             return;
         }
-
         if(!isValidEmail(usuario)) {
             mensagem.setText("E-mail fornecido é inválido.");
             return;
         }
         if(senha.length() < 6  ){
-
            mensagem.setText(emojierro + " É necessário que a senha contenha 6 dígitos.");
             return;
         }
@@ -94,30 +87,25 @@ public class CadastroActivity extends AppCompatActivity {
         if (!senha.equals(confirmarsenha)) {
             mensagem.setText("As senhas não são iguais! Tente novamente.");
             return;
-
         }
         CriarLogin();
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(CadastroActivity.this, LoginActivity.class);
         startActivity(intent);
-
+        finish();
     }
     // criaçaõ de elementos no layout para acompnhar em tempo real a verificação do usuario e senha
     private boolean isValidEmail(String usuario) {
         return usuario != null && Patterns.EMAIL_ADDRESS.matcher(usuario).matches();
     }
-
     public void CriarLogin() {
-
         // extrai dos Objetos, recuperando a String que pompões:
         String usuario = campoUsuario.getText().toString();
         String senha = campoSenha.getText().toString();
-
         // criando Json para enviar dados
         JSONObject obj = new JSONObject();
         try{
             obj.put("usuario", usuario);
             obj.put("senha", senha);
-
         } catch(JSONException e){
             e.printStackTrace();
             Toast.makeText(this, "Erro ao criar O JSON " , Toast.LENGTH_SHORT).show();
@@ -125,7 +113,6 @@ public class CadastroActivity extends AppCompatActivity {
         }
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, obj, response -> {
             Toast.makeText(CadastroActivity.this, "Cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
-
         },
                 error -> {
                     if(error.networkResponse != null){
@@ -136,11 +123,4 @@ public class CadastroActivity extends AppCompatActivity {
         // adicionar requisição a fila
         requestQueue.add(jsonObjectRequest);
     }
-
-    }
-
-
-
-
-
-
+}
