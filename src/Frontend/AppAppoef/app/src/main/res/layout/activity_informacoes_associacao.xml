@@ -76,18 +76,21 @@
                 android:id="@+id/btnRealizarProva"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/azul_escuro"
-                android:textColor="@color/bege"
-                android:textSize="20dp"
+                android:backgroundTint="@color/azul_2"
+                android:fontFamily="@font/inter_bold"
+                android:textColor="@color/branco"
+                android:textSize="15sp"
                 android:text="Realizar Prova" />
+
 
             <Button
                 android:id="@+id/btnInfEntrar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/azul_escuro"
-                android:textColor="@color/bege"
-                android:textSize="20dp"
+                android:backgroundTint="@color/azul_2"
+                android:fontFamily="@font/inter_bold"
+                android:textColor="@color/branco"
+                android:textSize="15sp"
                 android:text="Entrar" />
 
             <TextView

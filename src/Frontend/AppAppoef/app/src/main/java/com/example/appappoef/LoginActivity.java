@@ -1,16 +1,12 @@
 package com.example.appappoef;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.content.Intent;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,7 +22,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,9 +29,9 @@ import org.json.JSONObject;
 public class LoginActivity extends AppCompatActivity {
 
     private TextView campoUsuario, campoSenha, mensagem;
-    private Button btnEntrar;
+    private Button btnEntrar, btnNaoTenhoConta;
     private RequestQueue requestQueue;
-    private final String url = "https://7nzcxx-3000.csb.app/criarLogin";
+    private final String url = "https://h4592k-3000.csb.app/criarLogin";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +43,17 @@ public class LoginActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
 
         // Instanciar dados
-        campoUsuario = findViewById(R.id.textInputEditTextUsuario);
-        campoSenha = findViewById(R.id.textInputEditTextSenha);
+        campoUsuario = findViewById(R.id.textInputEditEmailL);
+        campoSenha = findViewById(R.id.textInputEditSenhaL);
         mensagem = findViewById(R.id.textMensagemErro);
-        btnEntrar = findViewById(R.id.btnInfEntrar);
+        btnEntrar = findViewById(R.id.btnEntrar);
+        btnNaoTenhoConta = findViewById(R.id.btnNaoTenhoConta);
+
+        btnNaoTenhoConta.setOnClickListener(v ->{
+            Intent intent = new Intent(LoginActivity.this, CadastroActivity.class);
+            startActivity(intent);
+            finish();
+        });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -60,7 +62,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
     public void Entrar(View view){
-        //
         btnEntrar.setEnabled(false);
         // extrai dos Objetos, recuperando a String que pompões:
         String usuario = campoUsuario.getText().toString();
@@ -68,14 +69,11 @@ public class LoginActivity extends AppCompatActivity {
         // Validar dados
         if (TextUtils.isEmpty(usuario) || TextUtils.isEmpty(senha)) {
             mensagem.setText("Os campos usuário ou senha não podem estar vazios.");
-
         }
-
         try {
             JSONObject dadosLogin = new JSONObject();
             dadosLogin.put("usuario", usuario);
             dadosLogin.put("senha", senha);
-
             JsonObjectRequest requisicaoLogin = new JsonObjectRequest(
                     Request.Method.POST,
                     url,
@@ -127,29 +125,20 @@ public class LoginActivity extends AppCompatActivity {
                                     // Mantém a mensagem padrão se não conseguir extrair
                                 }
                             }
-
                             mensagem.setText(errorMessage);
                             btnEntrar.setEnabled(true);
                         }
                     }
             );
-
             requisicaoLogin.setRetryPolicy(new DefaultRetryPolicy(
                     15000,    // 15 segundos timeout
                     1,        // 1 retry
                     1.0f      // backoffMultiplier
             ));
-
             requestQueue.add(requisicaoLogin);
-
         } catch (JSONException e) {
             mensagem.setText("Erro ao preparar dados de login");
             btnEntrar.setEnabled(true);
         }
-    }
-
-    public void NaoTenhoConta(View view) {
-        Intent intent = new Intent(LoginActivity.this, CadastroActivity.class);
-        startActivity(intent);
     }
 }

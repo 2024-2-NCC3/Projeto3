@@ -10,7 +10,10 @@
   "author": "Ives van Hoorne",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.21.0",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
+    "node": "^23.1.0",
+    "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7"
   }
 }

@@ -70,20 +70,22 @@
                 android:id="@+id/btnIniciarProva"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/azul_escuro"
                 android:onClick="IniciarProva"
                 android:text="Iniciar Prova"
-                android:textColor="@color/bege"
-                android:textSize="20dp" />
+                android:backgroundTint="@color/azul_2"
+                android:fontFamily="@font/inter_bold"
+                android:textColor="@color/branco"
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/btnOrientVoltar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Voltar"
-                android:backgroundTint="@color/azul_escuro"
-                android:textColor="@color/bege"
-                android:textSize="20dp"/>
+                android:backgroundTint="@color/azul_2"
+                android:fontFamily="@font/inter_bold"
+                android:textColor="@color/branco"
+                android:textSize="15sp"/>
 
         </LinearLayout>
     </ScrollView>
