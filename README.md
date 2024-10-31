@@ -53,6 +53,14 @@ Execute o APK e siga as instruções de seu telefone.
 Não há instalação!
 Encontre o index.html na pasta executáveis e execute-o como uma página WEB (através de algum browser).
 
+<b>NODE:</b>
+
+Instalar dependencias 
+- express
+- jsonwetoken
+- sqlite3
+
+
 ## 💻 Configuração para Desenvolvimento
 
 A instalação será feita como referencia em um Winows 10 - 64bits
