@@ -3,12 +3,10 @@ package com.example.appappoef;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +29,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class ProvaActivity extends AppCompatActivity {
 
     // Declaração de constantes
@@ -40,16 +44,20 @@ public class ProvaActivity extends AppCompatActivity {
 
     // Delcaração de objetos
     private RequestQueue requestQueue;
-    private TextView campoIdProva,campoQuestao, campoIdRespA, campoIdRespB, campoIdRespC, campoRespCorreta;
-    private TextView textNumTimeTotal, textNumTempoQ, textResultado;
-    private RadioButton campoTextRespA, campoTextRespB, campoTextRespC;
+    private TextView campoIdQuestao,campoQuestao;
+    private TextView texTimeTotal, textNumTimeTotal, textNumTempoQ, textResultado;
+    private RadioButton campoTextRespA, campoTextRespB, campoTextRespC, campoTextRespD;
+    private RadioGroup radioGroupRespostas;
     private Button btnProxima, btnFinalizarProva;
-    private SeekBar campoSeekBar;
 
     //Declaração de variáeis auxiliares
     private int indiceAtual = 0;
+    private int respostaCorreta;
+    private int selectedIndex;
+    private int selectedId;
     private JSONArray questoes;
     private CountDownTimer timer;
+    private int resultadoAcertos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,19 +87,17 @@ public class ProvaActivity extends AppCompatActivity {
     // Metodo para instancias de objetos
     private void instanciandoObjetos(){
         // Instanciando objetos
-        campoIdProva = findViewById(R.id.textIdProva);
+        campoIdQuestao = findViewById(R.id.textIdQuestao);
         campoQuestao = findViewById(R.id.textQuestao);
-        campoIdRespA = findViewById(R.id.textRespA);
+        radioGroupRespostas = findViewById(R.id.radioGroupRespostas);
         campoTextRespA = findViewById(R.id.radioTextRespA);
-        campoIdRespB = findViewById(R.id.textRespB);
         campoTextRespB = findViewById(R.id.radioTextRespB);
-        campoIdRespC = findViewById(R.id.textRespC);
         campoTextRespC = findViewById(R.id.radioTextRespC);
-        campoRespCorreta = findViewById(R.id.RespCorreta);
-        campoSeekBar = findViewById(R.id.seekBar);
+        campoTextRespD = findViewById(R.id.radioTextRespD);
 
         textNumTempoQ = findViewById(R.id.textNumTempoQ);
         textNumTimeTotal = findViewById(R.id.textNumTimeTotal);
+        texTimeTotal = findViewById(R.id.texTimeTotal);
         textResultado = findViewById(R.id.textResultado);
 
         btnProxima = findViewById(R.id.btnProxima);
@@ -101,64 +107,136 @@ public class ProvaActivity extends AppCompatActivity {
     private void listeners(){
         btnProxima.setOnClickListener(view -> {
             avancarQuestoes();
-
+            radioGroupRespostas.clearCheck();
         });
-
         btnFinalizarProva.setOnClickListener(view -> {
             Intent intent = new Intent(ProvaActivity.this, PrincipalActivity.class);
             startActivity(intent);
         });
+
     }
-    // metodo ocultar objetos
-    private void ocultarObjetos(){
-        campoIdProva.setVisibility(View.GONE);
-        campoIdRespA.setVisibility(View.GONE);
-        campoTextRespA.setVisibility(View.GONE);
-        campoIdRespB.setVisibility(View.GONE);
-        campoTextRespB.setVisibility(View.GONE);
-        campoIdRespC.setVisibility(View.GONE);
-        campoTextRespC.setVisibility(View.GONE);
-        campoRespCorreta.setVisibility(View.GONE);
+    //Metodo para buscar infromações do servidor, pegar os dados da prova, mostar as perguntas na activity
+    // Metodo para avançar a questão,finalizar prova, ocultar objetos
+    public void dadosServidor(){
+        //Buscar dados do servidor
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                "https://h4592k-3000.csb.app/perguntaCadastrada",
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        pegarDados(response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //Erro na requisição
+                        Toast.makeText(ProvaActivity.this, "Erro ao buscar dados: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        // Requisição à fila
+        requestQueue.add(jsonArrayRequest);
     }
-    // Metodo para mostar as perguntas na activity
-    private void mostrarPergunta(int indice){
+    public void mostrarPergunta(int indice){
         // Verifica se o indice está dentro do intervalo
         if(questoes != null && indice >= 0 && indice < questoes.length()){
             try {
                 JSONObject obj = questoes.getJSONObject(indice);
+                String idQuestao = obj.has("idQuestao") ? obj.getString("idQuestao") : "ID não disponível";
+                String questao = obj.has("Questao") ? obj.getString("Questao") : "Questão não disponível";
+                String respCorreta = obj.has("RespCorreta") ? obj.getString("RespCorreta") : "Resposta não disponível";
+                String textRespA = obj.has("textRespA") ? obj.getString("textRespA") : "Resposta A não disponível";
+                String textRespB = obj.has("textRespB") ? obj.getString("textRespB") : "Resposta B não disponível";
+                String textRespC = obj.has("textRespC") ? obj.getString("textRespC") : "Resposta C não disponível";
+                // Lista de respostas
+                List<String> respostas = new ArrayList<>();
+                respostas.add(respCorreta);
+                respostas.add(textRespA);
+                respostas.add(textRespB);
+                respostas.add(textRespC);
+
+                // Embaralhando as respostas
+                Collections.shuffle(respostas);
+
+                // Resposta correta após embaralhar
+                respostaCorreta = respostas.indexOf(respCorreta);
+
                 // Pegar dados
-                campoIdProva.setText(obj.getString("idProva"));
-                campoQuestao.setText(obj.getString("Questao"));
-                campoIdRespA.setText(obj.getString("idRespA"));
-                campoTextRespA.setText(obj.getString("textRespA"));
-                campoIdRespB.setText(obj.getString("idRespB"));
-                campoTextRespB.setText(obj.getString("textRespB"));
-                campoIdRespC.setText(obj.getString("idRespC"));
-                campoTextRespC.setText(obj.getString("textRespC"));
-                campoRespCorreta.setText(obj.getString("RespCorreta"));
+                campoIdQuestao.setText(idQuestao);
+                campoQuestao.setText(questao);
+                campoTextRespA.setText(respostas.get(0));
+                campoTextRespB.setText(respostas.get(1));
+                campoTextRespC.setText(respostas.get(2));
+                campoTextRespD.setText(respostas.get(3));
             } catch (JSONException e) {
                 e.printStackTrace();
                 Toast.makeText(ProvaActivity.this, "Erro ao processar o JSON", Toast.LENGTH_SHORT).show();
-                }
+            }
         } else {
             // Se indice fora do intervalo
             Toast.makeText(ProvaActivity.this, "Indice fora do Intervalor", Toast.LENGTH_SHORT).show();
         }
     }
-    // Metodo de contagem regressiva
+    public void pegarDados(JSONArray response){
+        questoes = response;
+        mostrarPergunta(indiceAtual);
+    }
+    public void avancarQuestoes(){
+        selectedId = radioGroupRespostas.getCheckedRadioButtonId();
+        if (selectedId != -1) {
+            RadioButton selectedRadioButton = findViewById(selectedId);
+            selectedIndex = radioGroupRespostas.indexOfChild(selectedRadioButton);
+            if (selectedIndex == respostaCorreta) {
+                resultadoAcertos++;
+            }
+            // Incrementa o indice para exibir a próxima pergunta
+            if (questoes != null && indiceAtual < questoes.length() - 1) {
+                indiceAtual++;
+                mostrarPergunta(indiceAtual); // mostar a próxima pergunta
+                contagemRegressivaQ(90000);
+            } else {
+                finalizarProva();
+            }
+        }else {
+            Toast.makeText(this, "Por favor, selecione uma resposta.", Toast.LENGTH_SHORT).show();
+        }
+    }
+    private void finalizarProva(){
+        // Se ultimo item
+        textResultado.setVisibility(View.VISIBLE);
+        textResultado.setText("Prova finalizada! "+ resultadoAcertos +"\n Aguarde e-mail da APPOEF com seu resultado.");
+        btnFinalizarProva.setVisibility(View.VISIBLE);
+        btnProxima.setVisibility(View.GONE);
+        ocultarObjetos();
+    }
+    private void ocultarObjetos(){
+        textNumTimeTotal.setVisibility(View.GONE);
+        texTimeTotal.setVisibility(View.GONE);
+        campoIdQuestao.setVisibility(View.GONE);
+        campoQuestao.setVisibility(View.GONE);
+        campoTextRespA.setVisibility(View.GONE);
+        campoTextRespB.setVisibility(View.GONE);
+        campoTextRespC.setVisibility(View.GONE);
+        campoTextRespD.setVisibility(View.GONE);
+    }
+    // Metodo para formatar o tempo em mm ss e contagem regressiva
+    private String formataTempo(long tempo){
+        long min = (tempo / 1000) / 60;
+        long sec = (tempo/ 1000) % 60;
+        return String.format("%02d:%02d", min, sec);
+    }
     private void contagemRegressivaTotal(long tempoInicialTotal){
-        campoSeekBar.setMax((int) (tempoInicialTotal / 1000));
-        campoSeekBar.setProgress((int) (tempoInicialTotal / 1000));
         new CountDownTimer(tempoInicialTotal, 1000){
             @Override
             public void onTick(long millisUntilFinished){
                 textNumTimeTotal.setText(formataTempo(millisUntilFinished));
-                campoSeekBar.setProgress((int) (millisUntilFinished / 1000));
             }
             @Override
             public void onFinish(){
                 textNumTimeTotal.setText("Fim!");
-                campoSeekBar.setProgress(0);
             }
         }.start();
     }
@@ -178,61 +256,5 @@ public class ProvaActivity extends AppCompatActivity {
                 avancarQuestoes();
             }
         }.start();
-    }
-    //Metodo finalizar prova
-    private void finalizarProva(){
-        // Se ultimo item
-        textResultado.setVisibility(View.VISIBLE);
-        textResultado.setText("Prova finalizada! \n Aguarde e-mail da APPOEF com seu resultado.");
-        btnFinalizarProva.setVisibility(View.VISIBLE);
-        btnProxima.setVisibility(View.GONE);
-        ocultarObjetos();
-    }
-    //Metodo para buscar infromações do servidor
-    public void dadosServidor(){
-        //Buscar dados do servidor
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
-                Request.Method.GET,
-                URL_BUSCAR_DADOS,
-                null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        buscarDados(response);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //Erro na requisição
-                        Log.e("Volley", "Erro ao buscar dados: " + error.getMessage());
-                        Toast.makeText(ProvaActivity.this, "Erro ao buscar dados: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-        );
-        // Requisição à fila
-        requestQueue.add(jsonArrayRequest);
-    }
-    // Metodo para pegar os dados da prova
-    public void buscarDados(JSONArray response){
-        questoes = response;
-        mostrarPergunta(indiceAtual);
-    }
-    // Metodo para mudar de questão
-    public void avancarQuestoes(){
-        // Incrementa o indice para exibir a próxima pergunta
-        if (questoes != null && indiceAtual < questoes.length() - 1){
-            indiceAtual++;
-            mostrarPergunta(indiceAtual); // mostar a próxima pergunta
-            contagemRegressivaQ(90000);
-        }else {
-            finalizarProva();
-        }
-    }
-    // Metodo para formatar o tempo em mm ss
-    private String formataTempo(long tempo){
-        long min = (tempo / 1000) / 60;
-        long sec = (tempo/ 1000) % 60;
-        return String.format("%02d:%02d", min, sec);
     }
 }

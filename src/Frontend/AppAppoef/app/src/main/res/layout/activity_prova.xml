@@ -64,6 +64,7 @@
         android:layout_height="wrap_content"
         android:text="00:00"
         android:textSize="20sp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.953"
@@ -77,6 +78,7 @@
         android:layout_height="wrap_content"
         android:text="Tempo Questão"
         android:textSize="20sp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.698"
@@ -85,7 +87,7 @@
         app:layout_constraintVertical_bias="0.186" />
 
     <TextView
-        android:id="@+id/textIdProva"
+        android:id="@+id/textIdQuestao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="P1"
@@ -93,45 +95,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.038"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.008" />
-
-    <TextView
-        android:id="@+id/textRespA"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="a"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.104"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.008" />
-
-    <TextView
-        android:id="@+id/textRespB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="b"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.153"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.008" />
-
-    <TextView
-        android:id="@+id/textRespC"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="c"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.211"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.008" />
@@ -153,33 +116,23 @@
         app:layout_constraintVertical_bias="0.248" />
 
     <TextView
-        android:id="@+id/RespCorreta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="RC"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.035"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.040" />
-
-    <TextView
         android:id="@+id/textResultado"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="textStart"
-        android:textSize="20sp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/inter_bold"
+        android:textAlignment="center"
+        android:textSize="50sp"
         android:textStyle="bold"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <RadioGroup
-        android:id="@+id/radioGroupProva"
+        android:id="@+id/radioGroupRespostas"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -188,7 +141,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
 
 
         <RadioButton
@@ -213,7 +165,7 @@
             android:textSize="14dp" />
 
         <RadioButton
-            android:id="@+id/radioTextRespCorreta"
+            android:id="@+id/radioTextRespD"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""
@@ -223,9 +175,11 @@
 
     <Button
         android:id="@+id/btnProxima"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="18dp"
+        android:layout_marginEnd="16dp"
         android:backgroundTint="@color/azul_1"
         android:fontFamily="@font/inter_bold"
         android:text="Próxima"
@@ -240,9 +194,11 @@
 
     <Button
         android:id="@+id/btnFinalizarProva"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="18dp"
+        android:layout_marginEnd="16dp"
         android:backgroundTint="@color/azul_1"
         android:fontFamily="@font/inter_bold"
         android:text="Finalizar Prova"
@@ -255,20 +211,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.805" />
-
-    <SeekBar
-        android:id="@+id/seekBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:max="100"
-        android:padding="20dp"
-        android:progressTint="#FF0000"
-        app:layout_constraintVertical_bias="0.15"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
