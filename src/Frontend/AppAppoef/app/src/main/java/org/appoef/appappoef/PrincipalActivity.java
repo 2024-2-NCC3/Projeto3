@@ -14,7 +14,7 @@ import org.appoef.appappoef.R;
 
 public class PrincipalActivity extends AppCompatActivity {
 
-    private ImageButton btnAssociar;
+    private ImageButton btnPerfil, btnAssociar, btnBuscar, btnProva, btnCalendario, btnServicos, btnMembros, btnSobre, btnConfiguracoes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +23,30 @@ public class PrincipalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_principal);
 
         btnAssociar = findViewById(R.id.btnAssociar);
+        btnPerfil = findViewById(R.id.btnPerfil);
+        btnBuscar = findViewById(R.id.btnBuscar);
+        btnProva = findViewById(R.id.btnProva);
+        btnCalendario = findViewById(R.id.btnCalendario);
+        btnServicos = findViewById(R.id.btnServicos);
+        btnMembros = findViewById(R.id.btnMembros);
+        btnSobre = findViewById(R.id.btnSobre);
+        btnConfiguracoes = findViewById(R.id.btnConfiguracoes);
 
         btnAssociar.setOnClickListener(v ->{
             Intent intent = new Intent(PrincipalActivity.this, InformacoesAssociacaoActivity.class);
             startActivity(intent);
         });
+
+        btnProva.setOnClickListener(v ->{
+            Intent intent = new Intent(PrincipalActivity.this, OrientacaoProvaActivity.class);
+            startActivity(intent);
+        });
+
+        /* btnCalendario.setOnClickListener(v ->{
+            Intent intent = new Intent(PrincipalActivity.this, CalendarioActivity.class);
+            startActivity(intent);
+        }); */
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
