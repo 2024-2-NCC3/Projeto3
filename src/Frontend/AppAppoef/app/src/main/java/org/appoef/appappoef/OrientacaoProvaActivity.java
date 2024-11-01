@@ -1,9 +1,8 @@
-package com.example.appappoef;
+package org.appoef.appappoef;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,20 +10,31 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class PrincipalActivity extends AppCompatActivity {
+import org.appoef.appappoef.R;
 
-    private ImageButton btnAssociar;
+public class OrientacaoProvaActivity extends AppCompatActivity {
+
+    private Button btnIniciarProva;
+    private Button btnOrientVoltar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_principal);
+        setContentView(R.layout.activity_orientacao_prova);
 
-        btnAssociar = findViewById(R.id.btnAssociar);
+        btnOrientVoltar = findViewById(R.id.btnOrientVoltar);
+        btnIniciarProva = findViewById(R.id.btnIniciarProva);
 
-        btnAssociar.setOnClickListener(v ->{
-            Intent intent = new Intent(PrincipalActivity.this, InformacoesAssociacaoActivity.class);
+        btnIniciarProva.setOnClickListener(view -> {
+            Intent intent = new Intent(this, ProvaActivity.class);
+            startActivity(intent);
+
+        });
+
+        btnOrientVoltar.setOnClickListener(view -> {
+            Intent intent = new Intent(this, InformacoesAssociacaoActivity.class);
             startActivity(intent);
         });
 
@@ -34,4 +44,5 @@ public class PrincipalActivity extends AppCompatActivity {
             return insets;
         });
     }
+
 }

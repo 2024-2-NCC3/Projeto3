@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.appappoef'
+    namespace 'org.appoef.appappoef'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.example.appappoef"
+        applicationId "org.appoef.appappoef"
         minSdk 24
         targetSdk 34
         versionCode 1
