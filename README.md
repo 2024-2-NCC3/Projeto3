@@ -16,7 +16,7 @@
 <img src="imagens/APPOEFlogo.png" alt="APPOEF" border="0">
 
 
-Nosso projeto se trata de um aplicativo focado na ODS 4 (Emprego Digno e Crescimento Ecônomico), que visa oferecer educação financeira de fácil acesso para todos, possibilitando que todas as pessoas possam aprender a gerir melhor seu dinheiro, com dicas sobre como economizar, investir e cuidar de suas finanças pessoais. 
+Nosso projeto se trata de um aplicativo focado na  ODS 8 – Trabalho decente e crescimento econômico, que visa oferecer educação financeira de fácil acesso para todos, possibilitando que todas as pessoas possam aprender a gerir melhor seu dinheiro, com dicas sobre como economizar, investir e cuidar de suas finanças pessoais. 
 
 
 <a>
