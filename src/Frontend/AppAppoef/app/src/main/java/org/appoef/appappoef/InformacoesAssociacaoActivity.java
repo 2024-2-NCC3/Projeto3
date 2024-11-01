@@ -1,4 +1,4 @@
-package com.example.appappoef;
+package org.appoef.appappoef;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,31 +10,33 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class OrientacaoProvaActivity extends AppCompatActivity {
+import org.appoef.appappoef.R;
 
-    private Button btnIniciarProva;
-    private Button btnOrientVoltar;
+public class InformacoesAssociacaoActivity extends AppCompatActivity {
 
+    private Button btnRealizarProva;
+    private Button btnInfEntrar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_orientacao_prova);
+        setContentView(R.layout.activity_informacoes_associacao);
 
-        btnOrientVoltar = findViewById(R.id.btnOrientVoltar);
-        btnIniciarProva = findViewById(R.id.btnIniciarProva);
+        btnInfEntrar = findViewById(R.id.btnInfEntrar);
+        btnRealizarProva = findViewById(R.id.btnRealizarProva);
 
-        btnIniciarProva.setOnClickListener(view -> {
-            Intent intent = new Intent(this, ProvaActivity.class);
-            startActivity(intent);
-
-        });
-
-        btnOrientVoltar.setOnClickListener(view -> {
-            Intent intent = new Intent(this, InformacoesAssociacaoActivity.class);
+        btnRealizarProva.setOnClickListener(view -> {
+            Intent intent = new Intent(this, OrientacaoProvaActivity.class);
             startActivity(intent);
         });
+
+        btnInfEntrar.setOnClickListener(view -> {
+            Intent intent = new Intent(this, PrincipalActivity.class);
+            startActivity(intent);
+        });
+
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -42,5 +44,4 @@ public class OrientacaoProvaActivity extends AppCompatActivity {
             return insets;
         });
     }
-
 }

@@ -1,4 +1,4 @@
-package com.example.appappoef;
+package org.appoef.appappoef;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -22,6 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import org.appoef.appappoef.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;

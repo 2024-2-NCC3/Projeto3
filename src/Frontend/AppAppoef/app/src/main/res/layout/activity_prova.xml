@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProvaActivity"
+    tools:context="org.appoef.appappoef.ProvaActivity"
     android:background="@drawable/background_prova">
 
     <ImageView

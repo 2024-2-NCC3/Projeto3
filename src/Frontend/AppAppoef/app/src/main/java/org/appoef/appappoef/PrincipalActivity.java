@@ -1,8 +1,8 @@
-package com.example.appappoef;
+package org.appoef.appappoef;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,31 +10,24 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class InformacoesAssociacaoActivity extends AppCompatActivity {
+import org.appoef.appappoef.R;
 
-    private Button btnRealizarProva;
-    private Button btnInfEntrar;
+public class PrincipalActivity extends AppCompatActivity {
+
+    private ImageButton btnAssociar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_informacoes_associacao);
+        setContentView(R.layout.activity_principal);
 
-        btnInfEntrar = findViewById(R.id.btnInfEntrar);
-        btnRealizarProva = findViewById(R.id.btnRealizarProva);
+        btnAssociar = findViewById(R.id.btnAssociar);
 
-        btnRealizarProva.setOnClickListener(view -> {
-            Intent intent = new Intent(this, OrientacaoProvaActivity.class);
+        btnAssociar.setOnClickListener(v ->{
+            Intent intent = new Intent(PrincipalActivity.this, InformacoesAssociacaoActivity.class);
             startActivity(intent);
         });
-
-        btnInfEntrar.setOnClickListener(view -> {
-            Intent intent = new Intent(this, PrincipalActivity.class);
-            startActivity(intent);
-        });
-
-
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
