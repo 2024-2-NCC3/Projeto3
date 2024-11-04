@@ -24,17 +24,18 @@ import org.appoef.appappoef.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import javax.crypto.SecretKey;
+
 public class CadastroActivity extends AppCompatActivity {
 
     private String emojierro;
     private TextView campoNomeUsuario, campoUsuario, campoSenha, campoConfirmarSenha, mensagem;
     private RequestQueue requestQueue;
-    private final String url = "https://h4592k-3000.csb.app/cadastrarUsuario";
+    private final String url = "https://2g9tc9-3000.csb.app/cadastrar";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_cadastro);
 
         emojierro = getString(R.string.emojierror);
@@ -44,84 +45,95 @@ public class CadastroActivity extends AppCompatActivity {
         campoConfirmarSenha = findViewById(R.id.textInputEditConfirmarSenha);
         mensagem = findViewById(R.id.textMensagemErro);
         requestQueue = Volley.newRequestQueue(this);
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
     }
+
     public void Entrar(View view) {
-        // extrai dos Objetos, recuperando a String que pompões:
-        String usuario = campoUsuario.getText().toString();
-        String senha = campoSenha.getText().toString();
-        String confirmarsenha = campoConfirmarSenha.getText().toString();
-        // VALIDAÇÃO ENTRADA ZERADA
+        String usuario = campoUsuario.getText().toString().trim();
+        String senha = campoSenha.getText().toString().trim();
+        String confirmarsenha = campoConfirmarSenha.getText().toString().trim();
+
+        String erroMensagem = validarEntradas(usuario, senha, confirmarsenha);
+        if (erroMensagem != null) {
+            mensagem.setText(erroMensagem);
+            return;
+        }
+
+        cadastrarUsuario(usuario, senha);
+    }
+
+    private String validarEntradas(String usuario, String senha, String confirmarsenha) {
         if (TextUtils.isEmpty(usuario) || TextUtils.isEmpty(senha) || TextUtils.isEmpty(confirmarsenha)) {
-            mensagem.setText("Os campos usuário ou senha não pode estar vazios.");
-            return;
+            return "Os campos usuário ou senha não podem estar vazios.";
         }
-        if(!isValidEmail(usuario)) {
-            mensagem.setText("E-mail fornecido é inválido.");
-            return;
+        if (!isValidEmail(usuario)) {
+            return "E-mail fornecido é inválido.";
         }
-        if(senha.length() < 6  ){
-           mensagem.setText(emojierro + " É necessário que a senha contenha 6 dígitos.");
-            return;
+        if (senha.length() < 6) {
+            return emojierro + " É necessário que a senha contenha pelo menos 6 caracteres.";
         }
-        if(!senha.matches(".*[!@#&*$/;~^+_-].*")){
-            mensagem.setText(emojierro + " É necessário que a senha contenha um caractere especial.");
-            return;
+        if (!senha.matches(".*[!@#&*$/;~^+_-].*")) {
+            return emojierro + " É necessário que a senha contenha um caractere especial.";
         }
-        if(!senha.matches(".*[A-Z].*")){
-            mensagem.setText(emojierro +" É necessário que a senha contenha uma letra maiúscula.");
-            return;
+        if (!senha.matches(".*[A-Z].*")) {
+            return emojierro + " É necessário que a senha contenha uma letra maiúscula.";
         }
-        if(!senha.matches(".*[a-z].*")){
-           mensagem.setText(emojierro + " É necessário que a senha contenha uma letra minúscula.");
-            return;
+        if (!senha.matches(".*[a-z].*")) {
+            return emojierro + " É necessário que a senha contenha uma letra minúscula.";
         }
-        if(!senha.matches(".*[0-9].*")){
-           mensagem.setText(emojierro +" É necessário que a senha contenha um número.");
-            return;
+        if (!senha.matches(".*[0-9].*")) {
+            return emojierro + " É necessário que a senha contenha um número.";
         }
         if (!senha.equals(confirmarsenha)) {
-            mensagem.setText("As senhas não são iguais! Tente novamente.");
-            return;
+            return "As senhas não são iguais! Tente novamente.";
         }
-        CriarLogin();
-        Intent intent = new Intent(CadastroActivity.this, LoginActivity.class);
-        startActivity(intent);
-        finish();
+        return null; // sem erros
     }
-    // criaçaõ de elementos no layout para acompnhar em tempo real a verificação do usuario e senha
+
     private boolean isValidEmail(String usuario) {
         return usuario != null && Patterns.EMAIL_ADDRESS.matcher(usuario).matches();
     }
-    public void CriarLogin() {
-        // extrai dos Objetos, recuperando a String que pompões:
-        String usuario = campoUsuario.getText().toString();
-        String senha = campoSenha.getText().toString();
-        // criando Json para enviar dados
-        JSONObject obj = new JSONObject();
-        try{
+
+    public void cadastrarUsuario(String usuario, String senha) {
+        try {
+            // Criptografar a senha antes de enviá-la
+            SecretKey chave = Criptografia.gerarChave(); // Gera a chave (em um cenário real, você deve armazená-la com segurança)
+            String senhaCriptografada = Criptografia.criptografar(senha, chave);
+
+            JSONObject obj = new JSONObject();
             obj.put("usuario", usuario);
-            obj.put("senha", senha);
-        } catch(JSONException e){
-            e.printStackTrace();
-            Toast.makeText(this, "Erro ao criar O JSON " , Toast.LENGTH_SHORT).show();
-            return;
-        }
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, obj, response -> {
-            Toast.makeText(CadastroActivity.this, "Cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
-        },
-                error -> {
-                    if(error.networkResponse != null){
-                        Log.e("Volley", "Erro na requisição: " + new String(error.networkResponse.data));
+            obj.put("senha", senhaCriptografada); // Enviando a senha criptografada
+
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, obj,
+                    response -> {
+                        try {
+                            if (response.getBoolean("success")) {
+                                Toast.makeText(this, "Cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(this, LoginActivity.class));
+                                finish();
+                            } else {
+                                String mensagemErro = response.getString("message");
+                                mensagem.setText(mensagemErro);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(this, "Erro ao processar resposta do servidor", Toast.LENGTH_SHORT).show();
+                        }
+                    },
+                    error -> {
+                        if (error.networkResponse != null && error.networkResponse.data != null) {
+                            String errorMessage = new String(error.networkResponse.data);
+                            Log.e("Cadastro", "Erro ao cadastrar: " + errorMessage);
+                            mensagem.setText("Erro ao cadastrar: " + errorMessage);
+                        } else {
+                            Toast.makeText(this, "Erro de rede. Verifique sua conexão.", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                }
-        );
-        // adicionar requisição a fila
-        requestQueue.add(jsonObjectRequest);
+            );
+
+            requestQueue.add(jsonObjectRequest);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Erro ao criptografar a senha", Toast.LENGTH_SHORT).show();
+        }
     }
 }
