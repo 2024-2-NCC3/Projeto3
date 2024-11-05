@@ -9,29 +9,22 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import org.appoef.appappoef.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import javax.crypto.SecretKey;
 
 public class CadastroActivity extends AppCompatActivity {
 
     private String emojierro;
     private TextView campoNomeUsuario, campoUsuario, campoSenha, campoConfirmarSenha, mensagem;
     private RequestQueue requestQueue;
-    private final String url = "https://2g9tc9-3000.csb.app/cadastrar";
+    private final String url = "https://h4592k-3000.csb.app/cadastrar";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,13 +88,9 @@ public class CadastroActivity extends AppCompatActivity {
 
     public void cadastrarUsuario(String usuario, String senha) {
         try {
-            // Criptografar a senha antes de enviá-la
-            SecretKey chave = Criptografia.gerarChave(); // Gera a chave (em um cenário real, você deve armazená-la com segurança)
-            String senhaCriptografada = Criptografia.criptografar(senha, chave);
-
             JSONObject obj = new JSONObject();
             obj.put("usuario", usuario);
-            obj.put("senha", senhaCriptografada); // Enviando a senha criptografada
+            obj.put("senha", senha); // Enviando a senha criptografada
 
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, obj,
                     response -> {

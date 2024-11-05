@@ -10,10 +10,11 @@
   "author": "Ives van Hoorne",
   "license": "MIT",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "crypto-js": "^4.2.0",
     "express": "^4.21.1",
-    "jsonwebtoken": "^9.0.2",
-    "node": "^23.1.0",
-    "sqlite": "^5.1.1",
-    "sqlite3": "^5.1.7"
+    "jsonwebtoken": "9.0.2",
+    "node": "22.11.0",
+    "sqlite3": "5.1.7"
   }
 }
