@@ -5,28 +5,16 @@ var banco = new sqlite3.Database(caminhoBanco);
 
 // metodos da Prova
 function postCadastrarPergunta(req, res) {
-  let Questao = req.body.Questao;
-  let idRespA = req.body.idRespA;
+  let questao = req.body.Questao;
+  let respCorreta = req.body.RespCorreta;
   let textRespA = req.body.textRespA;
-  let idRespB = req.body.idRespB;
   let textRespB = req.body.textRespB;
-  let idRespC = req.body.idRespC;
   let textRespC = req.body.textRespC;
-  let RespCorreta = req.body.RespCorreta;
 
   banco.run(
-    `INSERT INTO Prova (Questao, idRespA, textRespA, idRespB, textRespB, idRespC, textRespC, RespCorreta)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-    [
-      Questao,
-      idRespA,
-      textRespA,
-      idRespB,
-      textRespB,
-      idRespC,
-      textRespC,
-      RespCorreta,
-    ],
+    `INSERT INTO Prova (questao, respCorreta, textRespA, textRespB, textRespC)
+       VALUES (?, ?, ?, ?, ?)`,
+    [questao, respCorreta, textRespA, textRespB, textRespC],
     function (err) {
       if (err) {
         return res.status(500).send(err.message);
@@ -35,7 +23,7 @@ function postCadastrarPergunta(req, res) {
     }
   );
 }
-function getPerguntasCadastradas(req, res) {
+function getPerguntaCadastrada(req, res) {
   banco.all(`SELECT * FROM Prova`, [], (err, rows) => {
     if (err) {
       return res.send(err);
@@ -48,60 +36,91 @@ function postCriarProva(req, res) {
   if (!idLogin) {
     return res.status(400).send({ error: "Login é obrigatório" });
   }
-  let sql = `SELECT * FROM Prova ORDER BY random() LIMIT 5;`;
-  banco.all(sql, [], (err, rows) => {
-    if (err) {
-      return res.status(500).send({ error: "Erro ao buscar perguntas" });
+
+  // Verifica quantas provas já foram criadas para esse idLogin
+  let countSql = `SELECT COUNT(*) as total FROM ProvaUsuario WHERE idLogin = ?`;
+  banco.get(countSql, [idLogin], (countErr, countRow) => {
+    if (countErr) {
+      return res.status(500).send({ error: "Erro ao contar provas" });
     }
-    let provas = rows.map((prova) => ({
-      idProva: prova.idProva,
-      idLogin: idLogin,
-    }));
 
-    let insertSql = `INSERT INTO ProvaUsuario (idProva, idLogin)
-      VALUES (?, ?);`;
+    // Se já existem 5 ou mais provas, retorna erro
+    if (countRow.total >= 5) {
+      return res.status(400).send({ error: "Limite de 5 provas atingido" });
+    }
 
-    let insertPromises = provas.map((provaU) => {
-      return new Promise((resolve, reject) => {
-        banco.run(insertSql, [provaU.idProva, provaU.idLogin], (err) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve();
-          }
+    // Seleciona 5 questões aleatórias
+    let sql = `SELECT * FROM Prova ORDER BY random() LIMIT 5;`;
+    banco.all(sql, [], (err, rows) => {
+      if (err) {
+        return res.status(500).send({ error: "Erro ao buscar perguntas" });
+      }
+
+      // Mapeia as provas selecionadas
+      let provas = rows.map((prova) => ({
+        idProva: prova.idQuestao,
+        idLogin: idLogin,
+      }));
+
+      let insertSql = `INSERT INTO ProvaUsuario (idQuestao, idLogin) VALUES (?, ?);`;
+
+      let insertPromises = provas.map((provaU) => {
+        return new Promise((resolve, reject) => {
+          banco.run(insertSql, [provaU.idProva, provaU.idLogin], (err) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve();
+            }
+          });
         });
       });
-    });
 
-    // Aqui, aguarde todas as promessas de inserção serem concluídas
-    Promise.all(insertPromises)
-      .then(() => {
-        return res.send({ message: "Prova criada com sucesso" });
-      })
-      .catch((insertErr) => {
-        return res.status(500).send({ error: "Erro ao inserir provas" });
-      });
+      // aguardando todas as promessas de inserção serem concluídas
+      Promise.all(insertPromises)
+        .then(() => {
+          // Após a inserção, consultar as provas do usuário
+          let selectSql = `SELECT P.idQuestao, P.questao, P.respCorreta, P.textRespA, P.textRespB, P.textRespC
+                           FROM Prova P
+                           JOIN ProvaUsuario PU ON P.idQuestao = PU.idQuestao
+                           WHERE PU.idLogin = ?`;
+
+          banco.all(selectSql, [idLogin], (selectErr, provasCriadas) => {
+            if (selectErr) {
+              return res
+                .status(500)
+                .send({ error: "Erro ao buscar provas criadas" });
+            }
+            return res.json({
+              message: "Prova criada com sucesso",
+              provas: provasCriadas,
+            });
+          });
+        })
+        .catch((insertErr) => {
+          return res.status(500).send({ error: "Erro ao inserir provas" });
+        });
+    });
   });
 }
 function getProvaUsuario(req, res) {
-  let idLogin = req.query.idLogin; // Recebe o idLogin da query
-
-  idLogin = 3;
+  let idLogin = 1; // Recebe o idLogin da query
 
   if (!idLogin) {
     return res.status(400).send({ error: "Login é obrigatório" });
   }
-  console.log("Prova id:!" + idLogin);
+  console.log("Questao id:" + idLogin);
+
   // SQL para buscar as provas do usuário
   let sql = `
-      SELECT P.idProva, P.Questao, P.idRespA, P.textRespA, P.idRespB, P.textRespB, P.idRespC, P.textRespC, P.RespCorreta
-      FROM Prova P
-      JOIN ProvaUsuario PU ON P.idProva = PU.idProva
-      WHERE PU.idLogin = ?`;
+            SELECT P.idQuestao, P.questao, P.respCorreta, P.textRespA, P.textRespB, P.textRespC
+            FROM Prova P
+            JOIN ProvaUsuario PU ON P.idQuestao = PU.idQuestao
+            WHERE PU.idLogin = 1`;
 
   banco.all(sql, [idLogin], (err, rows) => {
-    1;
     if (err) {
+      console.error("Erro ao buscar provas:", err); // Log do erro
       return res.status(500).send({ error: "Erro ao buscar provas" });
     }
 
@@ -112,10 +131,34 @@ function getProvaUsuario(req, res) {
     return res.json(rows);
   });
 }
+function deletarTodasAsProvas(req, res) {
+  const sql = `DELETE FROM Prova`;
+  const sqlz = `VACUUM`;
+
+  banco.run(sql, function (err) {
+    if (err) {
+      return res.status(500).send("Erro ao deletar dados");
+    }
+
+    const linhasDeletadas = this.changes;
+
+    banco.run(sqlz, function (err) {
+      if (err) {
+        return res.status(500).send("Erro ao executar VACUUM");
+      }
+
+      res.send({
+        message: "Tabela limpa e chave primária reiniciada",
+        linhasDeletadas: linhasDeletadas,
+      });
+    });
+  });
+}
 // Exportar a função
 module.exports = {
   postCadastrarPergunta,
   postCriarProva,
-  getPerguntasCadastradas,
+  getPerguntaCadastrada,
   getProvaUsuario,
+  deletarTodasAsProvas,
 };

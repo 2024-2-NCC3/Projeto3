@@ -1,7 +1,6 @@
 package org.appoef.appappoef;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.content.Intent;
@@ -15,19 +14,14 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.RequestQueue;
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import org.appoef.appappoef.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.security.MessageDigest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     Button btnEntrar, btnNaoTenhoConta;
     RequestQueue requestQueue;
     private SharedPreferences sharedPreferences;
-    String url = "https://2g9tc9-3000.csb.app/login";
+    String url = "https://h4592k-3000.csb.app/login";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +48,6 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("token", "");
         editor.apply();
-
-
 
         // Instanciar dados
         campoUsuario = findViewById(R.id.textInputEditEmailL);
@@ -77,7 +69,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-
     public void Entrar(View view) {
         String usuario = campoUsuario.getText().toString().trim();
         String senha = campoSenha.getText().toString().trim();
@@ -86,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
             mensagem.setText("Os campos usuário e senha não podem estar vazios.");
             return;
         }
-       loginUsuario(usuario, senha);
+        loginUsuario(usuario, senha);
     }
 
     public void loginUsuario(String usuario, String senha) {
@@ -103,6 +94,17 @@ public class LoginActivity extends AppCompatActivity {
                     try {
                         if (response.getBoolean("success")) {
                             // Sucesso no login
+                            String token = response.getString("token");
+
+                            // Salvar o token noSharedPreferences
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("token", token);
+                            editor.apply();
+
+                            // Chamar a rota protegida
+                            acessarRotaProtegida(token);
+
+                            // Continue para a próxima atividade
                             Toast.makeText(this, "Login bem-sucedido!", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(LoginActivity.this, PrincipalActivity.class);
                             startActivity(intent);
@@ -117,12 +119,13 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 },
                 error -> {
-                    if (error.networkResponse != null && error.networkResponse.data != null) {
+                    if (error.networkResponse != null) {
                         String errorMessage = new String(error.networkResponse.data);
-                        Log.e("Login", "Erro ao logar: " + errorMessage);
-                        mensagem.setText("Erro ao logar: " + errorMessage);
+                        Log.e("Erro", "Erro ao acessar a rota protegida: " + errorMessage);
+                        mensagem.setText(errorMessage);
                     } else {
-                        Toast.makeText(this, "Erro de rede. Verifique sua conexão.", Toast.LENGTH_SHORT).show();
+                        Log.e("Erro", "Erro de rede. Verifique sua conexão: " + error.getMessage());
+                        mensagem.setText(error.getMessage());
                     }
                 }
         );
@@ -130,4 +133,27 @@ public class LoginActivity extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest);
     }
 
+    // Metodo para acessar uma rota protegida
+    public void acessarRotaProtegida(String token) {
+        String urlProtegido = "https://h4592k-3000.csb.app/usuario";
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, urlProtegido, null,
+                response -> {
+                    // Tratar resposta da rota protegida
+                    Log.d("Resposta", response.toString());
+                },
+                error -> {
+                    // Tratar erro
+                    Log.e("Erro", "Erro ao acessar a rota protegida: " + error.getMessage());
+                }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", token);
+                return headers;
+            }
+        };
+
+        requestQueue.add(jsonObjectRequest);
+    }
 }

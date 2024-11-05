@@ -2,13 +2,18 @@ var sqlite3 = require("sqlite3").verbose();
 var caminhoBanco = "BancoDadosAppoef.db"; //variável recebe o caminho
 var banco = new sqlite3.Database(caminhoBanco);
 
+const bcrypt = require("bcryptjs");
+
 const jwt = require("jsonwebtoken");
+
+// Definindo uma chave secreta para o JWT
 const tokenSecret = "T4#P90&876E454VDW##5678Pr$$#";
 
-// Rota para login de um usuário existente
-function postCriaLogin(req, res) {
-  let usuario = req.body.usuario;
-  let senha = req.body.senha;
+function postLogin(req, res) {
+  const usuario = req.body.usuario;
+  const senha = req.body.senha;
+
+  console.log("Dados recebidos:", req.body);
 
   if (!usuario || !senha) {
     return res.status(400).json({
@@ -17,98 +22,125 @@ function postCriaLogin(req, res) {
     });
   }
 
-  // verificando se ta tudo certo no usuario e senha
+  console.log("Tentando logar com:", usuario); // Log da tentativa de login
+
   banco.get(
-    "SELECT * FROM Login WHERE usuario = ? AND senha = ?",
-    [usuario, senha],
+    `SELECT * FROM Login WHERE usuario = ?`,
+    [usuario],
     function (err, row) {
       if (err) {
+        console.error("Erro ao buscar usuário:", err);
         return res.status(500).json({
           success: false,
           message: "Erro ao verificar usuário.",
         });
       }
 
+      console.log("Usuário encontrado:", row); // Log do usuário encontrado
+
       if (!row) {
-        // Se o usuário não existe ou a senha está incorreta
-        return res.status(400).json({
+        return res.status(401).json({
           success: false,
-          message: "usuario e senha incorretos!",
+          message: "Credenciais row inválidas.",
         });
       }
 
-      // Se o usuário existe e a senha está correta, cria o token
+      if (!bcrypt.compareSync(senha, row.senha)) {
+        return res.status(401).json({
+          success: false,
+          message: "Credenciais inválidas.",
+        });
+      }
+
       const payload = { idLogin: row.idLogin, usuario: row.usuario };
       const token = jwt.sign(payload, tokenSecret, { expiresIn: "1h" });
 
-      // Retorna sucesso com token
       return res.status(200).json({
         success: true,
-        message: "Login bem-sucedido",
+        message: "Login realizado com sucesso",
         token: token,
         idLogin: row.idLogin,
       });
     }
   );
 }
-// Rota para cadastrar um novo usuário
-function postCadastrarUsuario(req, res) {
-  let usuario = req.body.usuario;
-  let senha = req.body.senha;
+function getverificarToken(req, res, next) {
+  const token = req.headers["authorization"];
 
+  if (!token) {
+    return res
+      .status(401)
+      .json({ success: false, message: "Token não fornecido." });
+  }
+
+  jwt.verify(token, tokenSecret, (err, decoded) => {
+    if (err) {
+      return res
+        .status(401)
+        .json({ success: false, message: "Token inválido." });
+    }
+    // Salva os dados decodificados do token na requisição
+    req.user = decoded;
+    next();
+  });
+}
+// Função para cadastrar um usuário
+function postCadastrarUsuario(req, res) {
+  const usuario = req.body.usuario;
+  const senha = req.body.senha;
+
+  // Verifica se o usuário e a senha foram fornecidos
   if (!usuario || !senha) {
     return res.status(400).json({
       success: false,
-      message: "erro",
+      message: "Usuário e senha são obrigatórios.",
     });
   }
 
   // Verifica se o usuário já existe no banco de dados
   banco.get(
-    "SELECT * FROM Login WHERE usuario = ?",
+    `SELECT * FROM Login WHERE usuario = ?`,
     [usuario],
     function (err, row) {
       if (err) {
+        console.log("Erro ao verificar usuário:", err);
         return res.status(500).json({
           success: false,
-          message: "erro na verificação",
+          message: "Erro na verificação do usuário.",
         });
       }
 
       if (row) {
-        // Se o usuário já existe, retorna um erro
+        // Usuário já existe
         return res.status(400).json({
           success: false,
           message: "Usuário já existe.",
         });
       }
 
-      // Se o usuário não existe, cria um novo
+      // Criptografa a senha antes de armazená-la
+      const hashedPassword = bcrypt.hashSync(senha, 10);
+      console.log("Senha criptografada:", hashedPassword); // Exibe a senha criptografada
+
+      // Insere o novo usuário com a senha criptografada no banco
       banco.run(
         `INSERT INTO Login (usuario, senha) VALUES (?, ?)`,
-        [usuario, senha],
+        [usuario, hashedPassword],
         function (err) {
           if (err) {
+            console.log("Erro ao inserir usuário no banco de dados:", err);
             return res.status(500).json({
               success: false,
               message: "Erro ao criar usuário.",
             });
+          } else {
+            console.log("Usuário cadastrado com sucesso! ID:", this.lastID);
+            res.status(201).json({
+              success: true,
+              message: "Usuário cadastrado com sucesso!",
+              idLogin: this.lastID,
+            });
           }
-
-          // Pega o ID do usuário recém inserido
-          const idLogin = this.lastID;
-
-          // Cria o token com o ID do usuário
-          const payload = { idLogin: idLogin, usuario: usuario };
-          const token = jwt.sign(payload, tokenSecret, { expiresIn: "1h" });
-
-          // Retorna sucesso com token
-          return res.status(200).json({
-            success: true,
-            message: "Usuário criado com sucesso",
-            token: token,
-            idLogin: idLogin,
-          });
         }
       );
     }
@@ -117,15 +149,19 @@ function postCadastrarUsuario(req, res) {
 function getUsuarioCadastrado(req, res) {
   banco.all(`SELECT * FROM Login`, [], (err, rows) => {
     if (err) {
-      res.send(err);
+      console.error("Erro ao buscar usuárinos:", err);
+      return res
+        .status(500)
+        .json({ success: false, message: "Erro ao buscar usuários." });
     }
-    res.send(rows);
+    return res.status(200).json({ success: true, users: rows });
   });
 }
 
 // Exportar a função
 module.exports = {
-  postCriaLogin,
+  postLogin,
   postCadastrarUsuario,
   getUsuarioCadastrado,
+  getverificarToken,
 };
