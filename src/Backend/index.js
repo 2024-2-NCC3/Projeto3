@@ -22,7 +22,7 @@ app.get("/", (req, res) => {
 // Rotas de Usuário
 app.post("/cadastrar", usuario.postCadastrarUsuario);
 app.post("/login", usuario.postLogin);
-app.get("/usuario", usuario.getUsuarioCadastrado);
+app.get("/usuario", usuario.getverificarToken, usuario.getUsuarioCadastrado);
 
 // Rotas de Calendário
 app.post("/cadastrarEvento", calendario.postCadastrarEvento);
