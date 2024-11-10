@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 var sqlite3 = require("sqlite3").verbose();
 var caminhoBanco = "BancoDadosAppoef.db"; //variável recebe o caminho
 var banco = new sqlite3.Database(caminhoBanco);
@@ -7,7 +9,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 // Definindo uma chave secreta para o JWT
-const tokenSecret = "T4#P90&876E454VDW##5678Pr$$#";
+const tokenSecret = process.env.JWT_SECRET;
 
 function postLogin(req, res) {
   const usuario = req.body.usuario;
@@ -35,8 +37,6 @@ function postLogin(req, res) {
           message: "Erro ao verificar usuário.",
         });
       }
-
-      console.log("Usuário encontrado:", row); // Log do usuário encontrado
 
       if (!row) {
         return res.status(401).json({

@@ -73,25 +73,25 @@
                 android:text="" />
 
             <Button
-                android:id="@+id/btnRealizarProva"
+                android:id="@+id/btnInfProva"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/azul_2"
                 android:fontFamily="@font/inter_bold"
                 android:textColor="@color/branco"
                 android:textSize="15sp"
-                android:text="Realizar Prova" />
+                android:text="Informações sobre a Prova" />
 
 
             <Button
-                android:id="@+id/btnInfEntrar"
+                android:id="@+id/btnInfVoltar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/azul_2"
                 android:fontFamily="@font/inter_bold"
                 android:textColor="@color/branco"
                 android:textSize="15sp"
-                android:text="Entrar" />
+                android:text="Voltar" />
 
             <TextView
                 android:id="@+id/espaco1"
