@@ -1,6 +1,5 @@
 // Importações
 const express = require("express");
-const sqlite3 = require("sqlite3").verbose();
 
 const usuario = require("./usuario");
 const calendario = require("./calendario");

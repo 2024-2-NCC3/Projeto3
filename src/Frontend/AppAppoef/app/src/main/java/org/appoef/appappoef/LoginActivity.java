@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     Button btnEntrar, btnNaoTenhoConta;
     RequestQueue requestQueue;
     private SharedPreferences sharedPreferences;
-    String url = "https://h4592k-3000.csb.app/login";
+    String url = "https://qyyjfz-3000.csb.app/login";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,7 +135,7 @@ public class LoginActivity extends AppCompatActivity {
 
     // Metodo para acessar uma rota protegida
     public void acessarRotaProtegida(String token) {
-        String urlProtegido = "https://h4592k-3000.csb.app/usuario";
+        String urlProtegido = "https://qyyjfz-3000.csb.app/usuario";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, urlProtegido, null,
                 response -> {

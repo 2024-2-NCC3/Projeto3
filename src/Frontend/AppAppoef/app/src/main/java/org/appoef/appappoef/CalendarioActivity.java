@@ -53,7 +53,7 @@ public class CalendarioActivity extends AppCompatActivity {
         // CADASTRAR EVENTO
 
         btnCadastrar.setOnClickListener(view -> {
-            String url = "https://l773mt-3000.csb.app/cadastrarEvento";
+            String url = "https://qyyjfz-3000.csb.app/cadastrarEvento";
 
             String titulo = editTextTitulo.getText().toString();
             String descricao = editTextDescricao.getText().toString();
@@ -83,7 +83,7 @@ public class CalendarioActivity extends AppCompatActivity {
         // DELETAR EVENTO
 
         btnDeletar.setOnClickListener(view -> {
-            String url = "https://l773mt-3000.csb.app/deletarEvento";
+            String url = "https://qyyjfz-3000.csb.app/deletarEvento";
 
             // Cria JSON com a data do evento a ser deletado
             JSONObject jsonBody = new JSONObject();
@@ -108,7 +108,7 @@ public class CalendarioActivity extends AppCompatActivity {
 
         calendarView.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
             dataSelecionada[0] = year + "-" + (month + 1) + "-" + dayOfMonth;
-            String url = "http://seu-backend-url/eventosCadastrados?dataCalendario=" + dataSelecionada[0];
+            String url = "https://qyyjfz-3000.csb.app/eventosCadastrados" + dataSelecionada[0];
 
             JsonArrayRequest request = new JsonArrayRequest(
                     Request.Method.GET,

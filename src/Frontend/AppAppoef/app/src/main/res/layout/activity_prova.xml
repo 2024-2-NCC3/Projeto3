@@ -8,17 +8,6 @@
     tools:context="org.appoef.appappoef.ProvaActivity"
     android:background="@drawable/background_prova">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/textRespB2"
         android:layout_width="wrap_content"
@@ -37,7 +26,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tempo total:"
-        android:textSize="20sp"
+        android:textColor="@color/azul_3"
+        android:fontFamily="@font/inter_bold"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.695"
@@ -50,7 +41,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="00:00"
-        android:textSize="20sp"
+        android:textColor="@color/azul_3"
+        android:textSize="15sp"
+        android:fontFamily="@font/inter_bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.953"
@@ -63,8 +56,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="00:00"
-        android:textSize="20sp"
-        android:visibility="invisible"
+        android:textColor="@color/azul_3"
+        android:textSize="15sp"
+        android:fontFamily="@font/inter_bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.953"
@@ -77,8 +71,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tempo Questão"
-        android:textSize="20sp"
-        android:visibility="invisible"
+        android:textColor="@color/azul_3"
+        android:fontFamily="@font/inter_bold"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.698"
@@ -105,9 +100,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:fontFamily="@font/inter_bold"
         android:text=""
         android:textAlignment="center"
-        android:textSize="17sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -137,50 +133,62 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:padding="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
         <RadioButton
             android:id="@+id/radioTextRespA"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/botao_selecionado"
+            android:padding="10dp"
             android:text=""
-            android:textSize="14dp" />
+            android:textSize="14sp" /> <!-- Seletor aplicado aqui -->
 
         <RadioButton
             android:id="@+id/radioTextRespB"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/botao_selecionado"
+            android:padding="10dp"
             android:text=""
-            android:textSize="14dp" />
+            android:textSize="14sp" /> <!-- Seletor aplicado aqui -->
 
         <RadioButton
             android:id="@+id/radioTextRespC"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/botao_selecionado"
+            android:padding="10dp"
             android:text=""
-            android:textSize="14dp" />
+            android:textSize="14sp" /> <!-- Seletor aplicado aqui -->
 
         <RadioButton
             android:id="@+id/radioTextRespD"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/botao_selecionado"
+            android:padding="10dp"
             android:text=""
-            android:textSize="14dp" />
+            android:textSize="14sp" /> <!-- Seletor aplicado aqui -->
 
     </RadioGroup>
 
-    <Button
+<Button
         android:id="@+id/btnProxima"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="18dp"
         android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/azul_1"
+        android:backgroundTint="@color/azul_2"
         android:fontFamily="@font/inter_bold"
         android:text="Próxima"
         android:textColor="@color/branco"
@@ -199,7 +207,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="18dp"
         android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/azul_1"
+        android:backgroundTint="@color/azul_2"
         android:fontFamily="@font/inter_bold"
         android:text="Finalizar Prova"
         android:textColor="@color/branco"

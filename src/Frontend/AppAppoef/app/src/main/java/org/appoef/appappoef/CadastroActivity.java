@@ -24,7 +24,7 @@ public class CadastroActivity extends AppCompatActivity {
     private String emojierro;
     private TextView campoNomeUsuario, campoUsuario, campoSenha, campoConfirmarSenha, mensagem;
     private RequestQueue requestQueue;
-    private final String url = "https://h4592k-3000.csb.app/cadastrar";
+    private final String url = "https://qyyjfz-3000.csb.app/cadastrar";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
