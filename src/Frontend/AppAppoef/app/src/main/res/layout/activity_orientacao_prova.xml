@@ -8,11 +8,12 @@
     tools:context="org.appoef.appappoef.OrientacaoProvaActivity">
 
     <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -29,65 +30,118 @@
                 android:text="" />
 
             <TextView
-                android:id="@+id/textOrientacaoProva"
-                android:layout_width="wrap_content"
+                android:id="@+id/textDadosProva"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sejam muito bem-vindos à nossa prova online! Estamos felizes por vocês estarem aqui e prontos para mostrar todo o conhecimento adquirido. Antes de começarmos, gostaria de compartilhar algumas orientações para que tudo ocorra da melhor forma possível:
-        \nNome da Prova: APOEF
-        \nData e Hora:
-        \nDuração: 50min
-        \nPlataforma: aplicativo Apoef
-        \n\nInstruções de Acesso: Após iniciar a prova não poderá parar
-        \n\nEquipamentos:
-        \n - Celular ou tablet com acesso à internet
-        \n - Carregador ou bateria suficiente
-        \n\nPreparação
-        \n - Revisão,
-        \n - Revise os tópicos principais que serão abordados,
-        \n - Faça exercícios sobre os temas relevantes,
-        \nDicas Práticas
-        \n\nEscolha um lugar silencioso e sem distrações
-        \n - Leitura Atenta;
-        \n - Leia todas as instruções antes de começar;
-        \n - Gerenciamento do Tempo;
-        \n - Controle o tempo disponível para cada questão;
-        \n - Manutenção da Calma;
-
-        \n\nLembrem-se de revisar suas respostas antes de enviar.
-        \nVocês receberão feedback sobre o desempenho em breve.
-        \nEstamos aqui para apoiar vocês, e acreditamos que todos darão o melhor de si. Boa sorte a todos!
-        \n\nVamos começar!
-        "
-                android:textSize="16dp" />
+                android:fontFamily="monospace"
+                android:padding="10dp"
+                android:text="Prova para associar-se à APPOEF. Duração: 50 minutos. Plataforma: Aplicativo móvel Appoef"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/espaco1"
-                android:layout_width="match_parent"
+                android:id="@+id/textSaudacaoProva"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="" />
-
-            <Button
-                android:id="@+id/btnIniciarProva"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="IniciarProva"
-                android:text="Iniciar Prova"
-                android:backgroundTint="@color/azul_2"
-                android:fontFamily="@font/inter_bold"
-                android:textColor="@color/branco"
+                android:fontFamily="monospace"
+                android:text="Estamos felizes em te encontrar aqui, junto à nossa prova online, para mostrar todo o conhecimento adquirido!"
+                android:textAlignment="center"
                 android:textSize="15sp" />
 
-            <Button
-                android:id="@+id/btnOrientVoltar"
+            <TextView
+                android:id="@+id/textOrientacao1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Voltar"
-                android:backgroundTint="@color/azul_2"
-                android:fontFamily="@font/inter_bold"
-                android:textColor="@color/branco"
-                android:textSize="15sp"/>
+                android:fontFamily="monospace"
+                android:padding="10dp"
+                android:text="Antes de começar, algumas orientações para que tudo ocorra da melhor forma possível:\n\nInstruções: \n\nApós o início da prova, não será possível interromper."
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/textOrientacao2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:padding="10dp"
+                android:text="Equipamentos:
+                \n - Celular ou tablet com acesso à internet
+                \n\nImportante: Carregador ou bateria suficiente"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:padding="10dp"
+                android:text="Preparação:
+                \n - Revise os tópicos principais que serão abordados
+                \n - Faça exercícios sobre os temas relevantes"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:padding="10dp"
+                android:text="Dicas Práticas:
+                \n - Escolha um local tranquilo e sem distrações
+                \nLeitura Atenta: \n - Leia todas as instruções com cuidado antes de começar
+                \nGerenciamento do Tempo:
+                \n - Controle o tempo disponível para cada questão. Se o tempo acabar, a prova avançará automaticamente para a próxima questão."
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:padding="10dp"
+                android:text="Estamos aqui para apoiar você, e acreditamos que todos darão o melhor de si. \nBoa sorte! Vamos começar!\n\n"
+                android:textAlignment="center"
+                android:textSize="15sp" />
 
         </LinearLayout>
     </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/btnContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintTop_toBottomOf="@id/scrollView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btnIniciarProva"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/azul_2"
+            android:fontFamily="@font/inter_bold"
+            android:text="Iniciar Prova"
+            android:textColor="@color/branco"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/btnOrientVoltar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/azul_2"
+            android:fontFamily="@font/inter_bold"
+            android:text="Voltar"
+            android:textColor="@color/branco"
+            android:textSize="15sp" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -237,7 +237,6 @@ public class ProvaActivity extends AppCompatActivity {
                 e.printStackTrace();
                 Toast.makeText(ProvaActivity.this, "Erro ao processar o JSON", Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
-                Log.e("DescriptografarErro", "Erro ao descriptografar: " + e.getMessage());
                 e.printStackTrace();
                 Toast.makeText(ProvaActivity.this, "Erro ao descriptografar " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }

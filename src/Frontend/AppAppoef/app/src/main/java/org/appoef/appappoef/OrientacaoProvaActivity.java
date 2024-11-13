@@ -62,7 +62,7 @@ public class OrientacaoProvaActivity extends AppCompatActivity {
         token = sharedPreferences.getString("token", "");
 
         if (token.isEmpty()) {
-            Toast.makeText(this, "Token não encontrado!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Você precisa estar logado para realizar a prova!", Toast.LENGTH_SHORT).show();
             return;  // Não prosseguir se o token não for encontrado
         }
 
