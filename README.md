@@ -8,7 +8,7 @@
 ## Financeiras em Código
 
 ## Integrantes: <a href="https://www.linkedin.com/in/sabrinna-vicente-049225306/">Sabrinna Cristina Gomes Vicente</a>, <a href="https://www.linkedin.com/in/biaib/">Beatriz de Souza Santos Rio Branco</a>, <a href="https://www.linkedin.com/in/jenifer-barreto-55022523b/">Jenifer Barreto</a>, <a href="https://www.linkedin.com/in/mariaeflopes/">Maria Eduarda de Freitas Lopes</a>
-## Professores Orientadores: <a href="https://www.linkedin.com/in/victorbarq/">Victor Rosetti</a>, <a href="https://www.linkedin.com/in/vheltai/">Vinicius Heltai</a>, <a href="[https://www.linkedin.com/in/vheltai/](https://www.linkedin.com/in/katia-bossi/)">katia-bossi</a>
+## Professores Orientadores: <a href="https://www.linkedin.com/in/victorbarq/">Victor Rosetti</a>, <a href="https://www.linkedin.com/in/vheltai/">Vinicius Heltai</a>, <a href="https://www.linkedin.com/in/katia-bossi/">katia-bossi</a>
 
 ## Descrição
 
