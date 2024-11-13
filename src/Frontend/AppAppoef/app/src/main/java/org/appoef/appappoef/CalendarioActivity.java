@@ -50,16 +50,16 @@ public class CalendarioActivity extends AppCompatActivity {
 
         final String[] dataSelecionada = new String[1];
 
-        // CADASTRAR EVENTO
+        // Cadastra evento
 
         btnCadastrar.setOnClickListener(view -> {
-            String url = "https://qyyjfz-3000.csb.app/cadastrarEvento";
+            String URL_EVENTO = "https://qyyjfz-3000.csb.app/cadastrarEvento";
 
             String titulo = editTextTitulo.getText().toString();
             String descricao = editTextDescricao.getText().toString();
             String data = dataSelecionada[0];
 
-            // Cria JSON do evento
+            // JSON do evento
             JSONObject jsonBody = new JSONObject();
             try {
                 jsonBody.put("tituloCalendario", titulo);
@@ -71,10 +71,25 @@ public class CalendarioActivity extends AppCompatActivity {
 
             JsonObjectRequest request = new JsonObjectRequest(
                     Request.Method.POST,
-                    url,
+                    URL_EVENTO,
                     jsonBody,
-                    response -> Toast.makeText(CalendarioActivity.this, "Evento cadastrado com sucesso", Toast.LENGTH_SHORT).show(),
-                    error -> Toast.makeText(CalendarioActivity.this, "Erro ao cadastrar evento", Toast.LENGTH_SHORT).show()
+                    response -> {
+                        /*if (titulo.isEmpty() || descricao.isEmpty() || data == null) {
+                            Toast.makeText(CalendarioActivity.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+                            return;
+                        }*/
+                        Toast.makeText(CalendarioActivity.this, "Evento cadastrado com sucesso", Toast.LENGTH_SHORT).show();
+                    },
+                    error -> {
+                        String errorMessage = "Erro ao cadastrar evento: ";
+                        if (error.networkResponse != null) {
+                            errorMessage += " Código: " + error.networkResponse.statusCode;
+                        }
+                        errorMessage += " " + error.getMessage();
+                        Toast.makeText(CalendarioActivity.this, errorMessage, Toast.LENGTH_LONG).show();
+                        error.printStackTrace();
+                    }
+                    //error -> Toast.makeText(CalendarioActivity.this, "Erro ao cadastrar evento", Toast.LENGTH_SHORT).show()
             );
 
             Volley.newRequestQueue(this).add(request);
@@ -85,7 +100,6 @@ public class CalendarioActivity extends AppCompatActivity {
         btnDeletar.setOnClickListener(view -> {
             String url = "https://qyyjfz-3000.csb.app/deletarEvento";
 
-            // Cria JSON com a data do evento a ser deletado
             JSONObject jsonBody = new JSONObject();
             try {
                 jsonBody.put("dataCalendario", dataSelecionada[0]);
@@ -108,7 +122,7 @@ public class CalendarioActivity extends AppCompatActivity {
 
         calendarView.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
             dataSelecionada[0] = year + "-" + (month + 1) + "-" + dayOfMonth;
-            String url = "https://qyyjfz-3000.csb.app/eventosCadastrados" + dataSelecionada[0];
+            String url = "https://qyyjfz-3000.csb.app/eventosCadastrados?dataCalendario=" + dataSelecionada[0];
 
             JsonArrayRequest request = new JsonArrayRequest(
                     Request.Method.GET,

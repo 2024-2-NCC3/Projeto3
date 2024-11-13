@@ -2,72 +2,101 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CalendarioActivity">
+    tools:context=".CalendarioActivity"
+    android:background="@drawable/background_tela_principal"
+    >
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
 
-        <!-- CalendarView para visualizar e selecionar a data -->
-        <CalendarView
-            android:id="@+id/calendarView"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"/>
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <!-- Campo de entrada para o tÃ­tulo do evento -->
-        <EditText
-            android:id="@+id/editTextTitulo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="TÃ­tulo do Evento"
-            android:inputType="text"/>
+            <CalendarView
+                android:id="@+id/calendarView"
+                android:layout_width="374dp"
+                android:layout_height="312dp"
+                android:layout_marginBottom="16dp" />
 
-        <!-- Campo de entrada para a descriÃ§Ã£o do evento -->
-        <EditText
-            android:id="@+id/editTextDescricao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="DescriÃ§Ã£o do Evento"
-            android:inputType="textMultiLine"
-            android:minLines="3"
-            android:layout_marginBottom="16dp"/>
+            <TextView
+                android:id="@+id/textTituloEv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Título do Evento-"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-        <!-- BotÃ£o para cadastrar o evento -->
-        <Button
-            android:id="@+id/btnCadastrar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Cadastrar Evento"/>
+            <EditText
+                android:id="@+id/editTextTitulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Título do Evento"
+                android:inputType="text" />
 
-        <!-- BotÃ£o para deletar o evento da data selecionada -->
-        <Button
-            android:id="@+id/btnDeletar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Deletar Evento"
-            android:layout_marginTop="8dp"/>
+            <TextView
+                android:id="@+id/textDescEv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Descrição do Evento-"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-        <!-- ListView ou RecyclerView para listar eventos do dia selecionado -->
-        <TextView
-            android:id="@+id/textEventos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Eventos do Dia"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
+            <EditText
+                android:id="@+id/editTextDescricao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:hint="Descrição do Evento"
+                android:inputType="textMultiLine"
+                android:minLines="3" />
 
-        <ListView
-            android:id="@+id/listEventos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+            <Button
+                android:id="@+id/btnCadastrar"
+                android:layout_width="213dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/azul_2"
+                android:text="Cadastrar Evento" />
+
+            <Button
+                android:id="@+id/btnDeletar"
+                android:layout_width="216dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/azul_2"
+                android:text="Deletar Evento" />
+
+            <TextView
+                android:id="@+id/textEventos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Eventos do Dia-"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ListView
+                android:id="@+id/listEventos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/espaco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
