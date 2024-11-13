@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Administrador</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #333;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .associado-item {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="section">
+            <h2>Dados dos Associados</h2>
+            <button onclick="buscarDadosAssociados()">Carregar Dados dos Associados</button>
+            <div id="listaAssociados"></div>
+        </div>
+
+        <div class="section">
+            <h2>Cadastrar Pergunta para Prova</h2>
+            <input type="text" id="pergunta" placeholder="Digite a pergunta">
+            <input type="text" id="respCorreta" placeholder="Digite a resposta correta">
+            <input type="text" id="respA" placeholder="Digite a resposta A">
+            <input type="text" id="respB" placeholder="Digite a resposta B">
+            <input type="text" id="respC" placeholder="Digite a resposta C">
+            <button onclick="cadastrarPergunta()">Cadastrar Pergunta</button>
+        </div>
+
+        <div class="section">
+            <h2>Cadastrar Evento</h2>
+            <input type="text" id="tituloEvento" placeholder="Título do evento">
+            <textarea id="descricaoEvento" rows="4" placeholder="Descrição do evento"></textarea>
+            <input type="date" id="dataEvento">
+            <button onclick="cadastrarEvento()">Cadastrar Evento</button>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'https://t232cp-3000.csb.app';
+
+        // Função para obter o token do Android
+        function getToken() {
+            // Esta função deve ser implementada no Android para fornecer o token
+            // Por enquanto, vamos retornar um token fixo para teste
+            return "seu_token_aqui";
+        }
+
+        async function buscarDadosAssociados() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/usuario`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': getToken(),
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Falha ao buscar dados dos associados');
+                }
+
+                const data = await response.json();
+                exibirDadosAssociados(data.users);
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('Erro ao buscar dados dos associados: ' + error.message);
+            }
+        }
+
+        function exibirDadosAssociados(users) {
+            const listaAssociadosDiv = document.getElementById('listaAssociados');
+            listaAssociadosDiv.innerHTML = '';
+
+            users.forEach(user => {
+                const associadoDiv = document.createElement('div');
+                associadoDiv.classList.add('associado-item');
+                associadoDiv.innerHTML = `
+                    <p>Nome: ${user.usuario}</p>
+                    <p>Email: ${user.email}</p>
+                `;
+                listaAssociadosDiv.appendChild(associadoDiv);
+            });
+        }
+
+        async function cadastrarPergunta() {
+            const pergunta = document.getElementById('pergunta').value;
+            const respCorreta = document.getElementById('respCorreta').value;
+            const respA = document.getElementById('respA').value;
+            const respB = document.getElementById('respB').value;
+            const respC = document.getElementById('respC').value;
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/cadastrarPergunta`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': getToken(),
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        Questao: pergunta,
+                        RespCorreta: respCorreta,
+                        textRespA: respA,
+                        textRespB: respB,
+                        textRespC: respC
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Falha ao cadastrar pergunta');
+                }
+
+                alert('Pergunta cadastrada com sucesso!');
+                // Limpar campos
+                ['pergunta', 'respCorreta', 'respA', 'respB', 'respC'].forEach(id => {
+                    document.getElementById(id).value = '';
+                });
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('Erro ao cadastrar pergunta: ' + error.message);
+            }
+        }
+
+        async function cadastrarEvento() {
+            const titulo = document.getElementById('tituloEvento').value;
+            const descricao = document.getElementById('descricaoEvento').value;
+            const data = document.getElementById('dataEvento').value;
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/cadastrarEvento`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': getToken(),
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        tituloCalendario: titulo,
+                        descricaoCalendario: descricao,
+                        dataCalendario: data
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Falha ao cadastrar evento');
+                }
+
+                alert('Evento cadastrado com sucesso!');
+                // Limpar campos
+                ['tituloEvento', 'descricaoEvento', 'dataEvento'].forEach(id => {
+                    document.getElementById(id).value = '';
+                });
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('Erro ao cadastrar evento: ' + error.message);
+            }
+        }
+    </script>
+</body>
+</html>
