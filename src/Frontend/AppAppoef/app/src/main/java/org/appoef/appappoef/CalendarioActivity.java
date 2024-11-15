@@ -24,6 +24,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import android.widget.SimpleAdapter;
 
 
 public class CalendarioActivity extends AppCompatActivity {
@@ -143,8 +146,28 @@ public class CalendarioActivity extends AppCompatActivity {
                         }
 
                         // Exibir eventos no ListView
-                        ArrayAdapter<Evento> adapter = new ArrayAdapter<>(CalendarioActivity.this, android.R.layout.simple_list_item_1, eventos);
+
+                        List<Map<String, String>> data = new ArrayList<>();
+                        for (Evento evento : eventos) {
+                            Map<String, String> item = new HashMap<>();
+                            item.put("linha1", "Data: " + evento.getData());
+                            item.put("linha2", "Título: " + evento.getTitulo());
+                            item.put("linha3", "Descrição: " + evento.getDescricao());
+                            data.add(item);
+                        }
+
+                        SimpleAdapter adapter = new SimpleAdapter(
+                                CalendarioActivity.this,
+                                data,
+                                android.R.layout.simple_list_item_1,
+                                new String[]{"linha1", "linha2", "linha3"},
+                                new int[]{android.R.id.text1, android.R.id.text2, android.R.id.text2}
+                        );
+
                         listEventos.setAdapter(adapter);
+
+                        //ArrayAdapter<Evento> adapter = new ArrayAdapter<>(CalendarioActivity.this, android.R.layout.simple_list_item_1, eventos);
+                        //listEventos.setAdapter(adapter);
                     },
                     error -> Toast.makeText(CalendarioActivity.this, "Erro ao carregar eventos", Toast.LENGTH_SHORT).show()
             );
