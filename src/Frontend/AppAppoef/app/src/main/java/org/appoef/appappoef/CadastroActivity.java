@@ -24,7 +24,7 @@ public class CadastroActivity extends AppCompatActivity {
     private String emojierro;
     private TextView campoNomeUsuario, campoUsuario, campoSenha, campoConfirmarSenha, mensagem;
     private RequestQueue requestQueue;
-    private final String url = "https://qyyjfz-3000.csb.app/cadastrar";
+    private final String url = "https://3756jq-3000.csb.app/cadastrar";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,43 +41,44 @@ public class CadastroActivity extends AppCompatActivity {
     }
 
     public void Entrar(View view) {
+        String nome = campoNomeUsuario.getText().toString().trim();
         String usuario = campoUsuario.getText().toString().trim();
         String senha = campoSenha.getText().toString().trim();
         String confirmarsenha = campoConfirmarSenha.getText().toString().trim();
 
-        String erroMensagem = validarEntradas(usuario, senha, confirmarsenha);
+        String erroMensagem = validarEntradas(nome, usuario, senha, confirmarsenha);
         if (erroMensagem != null) {
             mensagem.setText(erroMensagem);
             return;
         }
 
-        cadastrarUsuario(usuario, senha);
+        cadastrarUsuario(nome, usuario, senha);
     }
 
-    private String validarEntradas(String usuario, String senha, String confirmarsenha) {
-        if (TextUtils.isEmpty(usuario) || TextUtils.isEmpty(senha) || TextUtils.isEmpty(confirmarsenha)) {
-            return "Os campos usuário ou senha não podem estar vazios.";
+    private String validarEntradas(String nome, String usuario, String senha, String confirmarsenha) {
+        if (TextUtils.isEmpty(nome) || TextUtils.isEmpty(usuario) || TextUtils.isEmpty(senha) || TextUtils.isEmpty(confirmarsenha)) {
+            return "Por favor, preencha todos os campos.";
         }
         if (!isValidEmail(usuario)) {
-            return "E-mail fornecido é inválido.";
+            return "O e-mail fornecido não é válido.";
         }
         if (senha.length() < 6) {
-            return emojierro + " É necessário que a senha contenha pelo menos 6 caracteres.";
+            return emojierro + " A senha deve ter pelo menos 6 caracteres.";
         }
         if (!senha.matches(".*[!@#&*$/;~^+_-].*")) {
-            return emojierro + " É necessário que a senha contenha um caractere especial.";
+            return emojierro + " A senha deve conter pelo menos um caractere especial.";
         }
         if (!senha.matches(".*[A-Z].*")) {
-            return emojierro + " É necessário que a senha contenha uma letra maiúscula.";
+            return emojierro + " A senha deve conter pelo menos uma letra maiúscula.";
         }
         if (!senha.matches(".*[a-z].*")) {
-            return emojierro + " É necessário que a senha contenha uma letra minúscula.";
+            return emojierro + " A senha deve conter pelo menos uma letra minúscula.";
         }
         if (!senha.matches(".*[0-9].*")) {
-            return emojierro + " É necessário que a senha contenha um número.";
+            return emojierro + " A senha deve conter pelo menos um número.";
         }
         if (!senha.equals(confirmarsenha)) {
-            return "As senhas não são iguais! Tente novamente.";
+            return "As senhas não coincidem. Tente novamente.";
         }
         return null; // sem erros
     }
@@ -86,35 +87,37 @@ public class CadastroActivity extends AppCompatActivity {
         return usuario != null && Patterns.EMAIL_ADDRESS.matcher(usuario).matches();
     }
 
-    public void cadastrarUsuario(String usuario, String senha) {
+    public void cadastrarUsuario(String nome, String usuario, String senha) {
         try {
             JSONObject obj = new JSONObject();
+            obj.put("nome", nome); // Enviar o nome do usuário
             obj.put("usuario", usuario);
-            obj.put("senha", senha); // Enviando a senha criptografada
+            obj.put("senha", senha); // Enviar a senha
 
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, obj,
                     response -> {
                         try {
                             if (response.getBoolean("success")) {
-                                Toast.makeText(this, "Cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(this, "Cadastro realizado com sucesso!", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(this, LoginActivity.class));
                                 finish();
                             } else {
-                                String mensagemErro = response.getString("message");
-                                mensagem.setText(mensagemErro);
+                                Toast.makeText(this, "Não foi possível realizar o Cadastro! Tente novamente", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(this, "Erro ao processar resposta do servidor", Toast.LENGTH_SHORT).show();
+                            // Mensagem amigável para o usuário
+                            Toast.makeText(this, "Ocorreu um erro inesperado. Por favor, tente novamente.", Toast.LENGTH_SHORT).show();
                         }
                     },
                     error -> {
+                        // Mensagem amigável para erro de rede
                         if (error.networkResponse != null && error.networkResponse.data != null) {
                             String errorMessage = new String(error.networkResponse.data);
-                            Log.e("Cadastro", "Erro ao cadastrar: " + errorMessage);
-                            mensagem.setText("Erro ao cadastrar: " + errorMessage);
+                            Log.e("Cadastro", "Erro ao cadastrar");
+                            mensagem.setText("Não foi possível completar o cadastro. Verifique sua conexão com a internet.");
                         } else {
-                            Toast.makeText(this, "Erro de rede. Verifique sua conexão.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Erro de rede. Por favor, verifique sua conexão e tente novamente.", Toast.LENGTH_SHORT).show();
                         }
                     }
             );
@@ -122,7 +125,7 @@ public class CadastroActivity extends AppCompatActivity {
             requestQueue.add(jsonObjectRequest);
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(this, "Erro ao criptografar a senha", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Ocorreu um erro ao processar seus dados. Por favor, tente novamente.", Toast.LENGTH_SHORT).show();
         }
     }
 }

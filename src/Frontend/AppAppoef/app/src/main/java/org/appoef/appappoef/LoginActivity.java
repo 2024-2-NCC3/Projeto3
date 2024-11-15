@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     Button btnEntrar, btnNaoTenhoConta;
     RequestQueue requestQueue;
     private SharedPreferences sharedPreferences;
-    String url = "https://qyyjfz-3000.csb.app/login";
+    String url = "https://3756jq-3000.csb.app/login";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,6 @@ public class LoginActivity extends AppCompatActivity {
 
         // Requisição acesso ao servidor
         requestQueue = Volley.newRequestQueue(this);
-
 
         sharedPreferences = getSharedPreferences("login_prefs", MODE_PRIVATE);
 
@@ -74,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
         String senha = campoSenha.getText().toString().trim();
 
         if (usuario.isEmpty() || senha.isEmpty()) {
-            mensagem.setText("Os campos usuário e senha não podem estar vazios.");
+            mensagem.setText("Por favor, preencha os campos de usuário e senha.");
             return;
         }
         loginUsuario(usuario, senha);
@@ -105,27 +104,27 @@ public class LoginActivity extends AppCompatActivity {
                             acessarRotaProtegida(token);
 
                             // Continue para a próxima atividade
-                            Toast.makeText(this, "Login bem-sucedido!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Bem-vindo! Você está logado.", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(LoginActivity.this, PrincipalActivity.class);
                             startActivity(intent);
                         } else {
                             // Falha no login
                             String mensagemErro = response.getString("message");
-                            mensagem.setText(mensagemErro);
+                            mensagem.setText("Erro: " + mensagemErro);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        Toast.makeText(this, "Erro ao processar resposta do servidor", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Ocorreu um erro. Tente novamente.", Toast.LENGTH_SHORT).show();
                     }
                 },
                 error -> {
                     if (error.networkResponse != null) {
                         String errorMessage = new String(error.networkResponse.data);
                         Log.e("Erro", "Erro ao acessar a rota protegida: " + errorMessage);
-                        mensagem.setText(errorMessage);
+                        mensagem.setText("Não foi possível completar o login. Verifique sua conexão com a internet.");
                     } else {
                         Log.e("Erro", "Erro de rede. Verifique sua conexão: " + error.getMessage());
-                        mensagem.setText(error.getMessage());
+                        mensagem.setText("Não conseguimos conectar ao servidor. Tente novamente mais tarde.");
                     }
                 }
         );
@@ -135,7 +134,7 @@ public class LoginActivity extends AppCompatActivity {
 
     // Metodo para acessar uma rota protegida
     public void acessarRotaProtegida(String token) {
-        String urlProtegido = "https://qyyjfz-3000.csb.app/usuario";
+        String urlProtegido = "https://3756jq-3000.csb.app/usuario";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, urlProtegido, null,
                 response -> {
