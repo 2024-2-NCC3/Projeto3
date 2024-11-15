@@ -28,14 +28,14 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/inter_bold"
         android:text="Login"
-        android:textSize="35sp"
         android:textColor="@color/branco"
+        android:textSize="35sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.45" />
+        app:layout_constraintVertical_bias="0.426" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutEmailL"
@@ -64,6 +64,12 @@
             android:minHeight="48dp"
             android:textColorHint="@color/azul_1" />
     </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutSenhaL"
@@ -101,10 +107,10 @@
         android:textColor="@color/vermelho_erro"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.75" />
+        app:layout_constraintVertical_bias="0.74" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutUsuario"
@@ -122,38 +128,6 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/btnEntrar"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:backgroundTint="@color/branco"
-        android:fontFamily="@font/inter_bold"
-        android:onClick="Entrar"
-        android:text="Entrar"
-        android:textColor="@color/azul_1"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.50"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.82" />
-
-    <Button
-        android:id="@+id/btnNaoTenhoConta"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:backgroundTint="@color/branco"
-        android:fontFamily="@font/inter_bold"
-        android:text="Não tenho conta"
-        android:textColor="@color/azul_1"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.89" />
-
     <!-- <TextView
         android:id="@+id/TextEsqSenha"
         android:layout_width="wrap_content"
@@ -169,5 +143,49 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.90" /> -->
 
+
+    <Button
+        android:id="@+id/btnEntrar"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:onClick="Entrar"
+        android:backgroundTint="@color/branco"
+        android:fontFamily="@font/inter_bold"
+        android:text="Entrar"
+        android:textColor="@color/azul_1"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.856" />
+
+    <Button
+        android:id="@+id/btnNaoTenhoConta"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:backgroundTint="@color/branco"
+        android:fontFamily="@font/inter_bold"
+        android:text="Não tenho conta"
+        android:textColor="@color/azul_1"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.942" />
+
+    <CheckBox
+        android:id="@+id/checkBoxLembrarLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lembrar login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.783" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

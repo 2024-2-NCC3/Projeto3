@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.635">
 
-
+        <!-- Título do perfil -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,6 +27,7 @@
             android:textSize="30sp"
             android:textStyle="bold" />
 
+        <!-- Imagem do perfil -->
         <ImageView
             android:id="@+id/imagemPerfil"
             android:layout_width="100dp"
@@ -34,70 +35,41 @@
             android:layout_gravity="center"
             android:src="@drawable/icon_associados" />
 
+        <!-- Nome Completo -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Nome Completo"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/textNomeCompleto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="250sp"
+            android:layout_height="50sp"
             android:hint="Nome Completo"
             android:inputType="textPersonName"
             android:textColor="#888888" />
 
+        <!-- E-mail -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="E-mail"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/textEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="250sp"
+            android:layout_height="60sp"
             android:hint="E-mail"
             android:inputType="textEmailAddress"
             android:textColor="#888888" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Número de Telefone"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-
-        <EditText
-            android:id="@+id/textTelefone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Número de Telefone"
-            android:textColor="#888888" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Senha"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/textSenha"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint=""
-            android:inputType="textPassword"
-            android:textColor="#888888" />
-
+        <!-- Botão Sair -->
         <Button
             android:id="@+id/btnSair"
             android:layout_width="wrap_content"
