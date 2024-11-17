@@ -15,7 +15,7 @@ function postLogin(req, res) {
   const usuario = req.body.usuario;
   const senha = req.body.senha;
 
-  console.log("Dados recebidos:", req.body);
+  console.log("Dados recebidos");
 
   if (!usuario || !senha) {
     return res.status(400).json({
@@ -24,7 +24,7 @@ function postLogin(req, res) {
     });
   }
 
-  console.log("Tentando logar com:", usuario); // Log da tentativa de login
+  console.log("Tentando logar com:", usuario);
 
   banco.get(
     `SELECT * FROM Login WHERE usuario = ?`,
@@ -41,7 +41,7 @@ function postLogin(req, res) {
       if (!row) {
         return res.status(401).json({
           success: false,
-          message: "Credenciais row inválidas.",
+          message: "Credenciais inválidas.",
         });
       }
 
@@ -53,13 +53,16 @@ function postLogin(req, res) {
       }
 
       const payload = { idLogin: row.idLogin, usuario: row.usuario };
-      const token = jwt.sign(payload, tokenSecret, { expiresIn: "1h" });
+      const token = jwt.sign(payload, tokenSecret, { expiresIn: "24h" });
 
+      
       return res.status(200).json({
         success: true,
         message: "Login realizado com sucesso",
         token: token,
         idLogin: row.idLogin,
+        nome: row.nome, // Adiciona o nome do usuário
+        usuario: row.usuario // Adiciona o email do usuário
       });
     }
   );
@@ -86,18 +89,17 @@ function getverificarToken(req, res, next) {
 }
 // Função para cadastrar um usuário
 function postCadastrarUsuario(req, res) {
+  const nome = req.body.nome; // Captura o nome enviado no cadastro
   const usuario = req.body.usuario;
   const senha = req.body.senha;
 
-  // Verifica se o usuário e a senha foram fornecidos
-  if (!usuario || !senha) {
+  if (!nome || !usuario || !senha) {
     return res.status(400).json({
       success: false,
-      message: "Usuário e senha são obrigatórios.",
+      message: "Nome, usuário e senha são obrigatórios.",
     });
   }
 
-  // Verifica se o usuário já existe no banco de dados
   banco.get(
     `SELECT * FROM Login WHERE usuario = ?`,
     [usuario],
@@ -111,21 +113,18 @@ function postCadastrarUsuario(req, res) {
       }
 
       if (row) {
-        // Usuário já existe
         return res.status(400).json({
           success: false,
           message: "Usuário já existe.",
         });
       }
 
-      // Criptografa a senha antes de armazená-la
       const hashedPassword = bcrypt.hashSync(senha, 10);
-      console.log("Senha criptografada:", hashedPassword); // Exibe a senha criptografada
+      console.log("Senha criptografada:", hashedPassword);
 
-      // Insere o novo usuário com a senha criptografada no banco
       banco.run(
-        `INSERT INTO Login (usuario, senha) VALUES (?, ?)`,
-        [usuario, hashedPassword],
+        `INSERT INTO Login (nome, usuario, senha) VALUES (?, ?, ?)`,
+        [nome, usuario, hashedPassword],
         function (err) {
           if (err) {
             console.log("Erro ao inserir usuário no banco de dados:", err);
@@ -138,7 +137,7 @@ function postCadastrarUsuario(req, res) {
             res.status(201).json({
               success: true,
               message: "Usuário cadastrado com sucesso!",
-              idLogin: this.lastID,
+              idLogin: this.lastID
             });
           }
         }
@@ -146,6 +145,8 @@ function postCadastrarUsuario(req, res) {
     }
   );
 }
+
+
 function getUsuarioCadastrado(req, res) {
   banco.all(`SELECT * FROM Login`, [], (err, rows) => {
     if (err) {
