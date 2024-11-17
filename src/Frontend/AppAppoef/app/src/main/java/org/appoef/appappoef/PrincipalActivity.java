@@ -2,9 +2,18 @@ package org.appoef.appappoef;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.text.style.UnderlineSpan;
+import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -15,6 +24,7 @@ import org.appoef.appappoef.R;
 public class PrincipalActivity extends AppCompatActivity {
 
     private ImageButton btnPerfil, btnAssociar, btnBuscar, btnProva, btnCalendario, btnConfiguracoes;
+    private TextView txtSobre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,32 +38,34 @@ public class PrincipalActivity extends AppCompatActivity {
         btnProva = findViewById(R.id.btnProva);
         btnCalendario = findViewById(R.id.btnCalendario);
         btnConfiguracoes = findViewById(R.id.btnConfiguracoes);
+        txtSobre = findViewById(R.id.txtSobre);
 
-        btnAssociar.setOnClickListener(v ->{
+        btnAssociar.setOnClickListener(v -> {
             Intent intent = new Intent(PrincipalActivity.this, InformacoesAssociacaoActivity.class);
             startActivity(intent);
         });
 
-        btnProva.setOnClickListener(v ->{
+        btnProva.setOnClickListener(v -> {
             Intent intent = new Intent(PrincipalActivity.this, OrientacaoProvaActivity.class);
             startActivity(intent);
         });
 
-        btnCalendario.setOnClickListener(v ->{
+        btnCalendario.setOnClickListener(v -> {
             Intent intent = new Intent(PrincipalActivity.this, CalendarioActivity.class);
             startActivity(intent);
         });
 
-        btnPerfil.setOnClickListener(v ->{
+        btnPerfil.setOnClickListener(v -> {
             Intent intent = new Intent(PrincipalActivity.this, PerfilActivity.class);
             startActivity(intent);
         });
 
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+        txtSobre.setOnClickListener(v -> {
+            Intent intent = new Intent(PrincipalActivity.this, SobreActivity.class);
+            startActivity(intent);
         });
     }
 }
+
+
+

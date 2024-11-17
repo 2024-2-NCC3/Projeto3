@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="org.appoef.appappoef.InformacoesAssociacaoActivity">
+
+
+    <ScrollView
+        android:id="@+id/scrollViewSob"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textTitulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:padding="3dp"
+                android:text="Sobre Nós"
+                android:textAlignment="center"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textSobre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:text="
+                \n A APOEF (Associação de Profissionais Planejadores, Orientadores e Educadores em Finanças) é uma organização civil de direito privado, sem fins lucrativos ou econômicos, criada com o objetivo de transformar a forma como as pessoas lidam com suas finanças. Com um forte compromisso com a disseminação de conhecimento, a associação busca promover a colaboração entre seus associados, fomentando iniciativas que visam orientar e educar sobre práticas financeiras saudáveis e sustentáveis.
+                \n\n Por meio de programas, palestras, cursos e ações comunitárias, a APPOEF atua para capacitar indivíduos e comunidades, ajudando-os a compreender a importância do planejamento financeiro, da poupança e do consumo consciente. Além disso, a associação acredita no poder da educação como ferramenta para reduzir desigualdades, ampliar oportunidades e construir uma sociedade mais equilibrada e financeiramente consciente.
+                \n\n Composta por uma rede de profissionais e voluntários dedicados, a APPOEF se posiciona como uma referência na área de educação financeira, comprometida em criar soluções acessíveis e impactantes que possam beneficiar pessoas de todas as idades e classes sociais. A missão da associação é clara: capacitar os indivíduos para que alcancem autonomia financeira e, consequentemente, uma melhor qualidade de vida.
+                \n\n Seja por meio da troca de experiências entre associados, do desenvolvimento de materiais educativos ou da organização de eventos, a APPOEF está determinada a ser um agente transformador, inspirando mudanças positivas na relação das pessoas com o dinheiro e promovendo uma gestão financeira mais consciente e eficiente.
+                \n\n"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/appoef_logo_1"/>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/scrollSob"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/btnContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="top"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintVertical_bias="0.96"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scrollViewSob">
+
+        <Button
+            android:id="@+id/btnVoltar"
+            android:layout_width="369dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/azul_2"
+            android:fontFamily="@font/inter_bold"
+            android:text="Voltar"
+            android:textColor="@color/branco"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
