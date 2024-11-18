@@ -35,10 +35,6 @@ public class PerfilActivity extends AppCompatActivity {
 
         // Configurar o botão Sair
         btnSair.setOnClickListener(view -> {
-            // Limpar o SharedPreferences
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.clear(); // Remove todos os dados salvos
-            editor.apply();
 
             // Redirecionar para a página de login
             Intent intent = new Intent(PerfilActivity.this, LoginActivity.class);
