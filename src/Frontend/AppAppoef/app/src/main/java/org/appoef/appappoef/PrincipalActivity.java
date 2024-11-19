@@ -65,6 +65,11 @@ public class PrincipalActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        btnConfiguracoes.setOnClickListener(v -> {
+            Intent intent = new Intent(PrincipalActivity.this, ConfiguracoesActivity.class);
+            startActivity(intent);
+        });
+
         txtSobre.setOnClickListener(v -> {
             Intent intent = new Intent(PrincipalActivity.this, SobreActivity.class);
             startActivity(intent);

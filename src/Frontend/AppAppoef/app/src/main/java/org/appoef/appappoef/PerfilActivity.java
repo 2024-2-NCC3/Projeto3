@@ -13,16 +13,27 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 public class PerfilActivity extends AppCompatActivity {
     TextView usuarioNome, usuarioEmail;
-    Button btnSair;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
 
+Config
+       usuarioNome = findViewById(R.id.textNomeCompleto);
+       usuarioEmail = findViewById(R.id.textEmail);
+       btnSair = findViewById(R.id.btnSair);
+
+        btnSair.setOnClickListener(v -> {
+            Intent intent = new Intent(PerfilActivity.this, LoginActivity.class);
+            startActivity(intent);
+        });
+
         usuarioNome = findViewById(R.id.textNomeCompleto);
         usuarioEmail = findViewById(R.id.textEmail);
         btnSair = findViewById(R.id.btnSair);
+ main
 
         // Recuperar os dados do SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("login_prefs", MODE_PRIVATE);
