@@ -1,6 +1,7 @@
 package org.appoef.appappoef;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -19,8 +20,11 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
+
 public class CadastroActivity extends AppCompatActivity {
 
+    private SharedPreferences sharedPreferences;
     private String emojierro;
     private TextView campoNomeUsuario, campoUsuario, campoSenha, campoConfirmarSenha, mensagem;
     private RequestQueue requestQueue;
@@ -98,6 +102,13 @@ public class CadastroActivity extends AppCompatActivity {
                     response -> {
                         try {
                             if (response.getBoolean("success")) {
+                                // Salvar nome e email no SharedPreferences
+                                SharedPreferences sharedPreferences = getSharedPreferences("login_prefs", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("nome", nome); // Salvar o nome
+                                editor.putString("email", usuario); // Salvar o email
+                                editor.apply();
+
                                 Toast.makeText(this, "Cadastro realizado com sucesso!", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(this, LoginActivity.class));
                                 finish();
@@ -106,14 +117,11 @@ public class CadastroActivity extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            // Mensagem amigável para o usuário
                             Toast.makeText(this, "Ocorreu um erro inesperado. Por favor, tente novamente.", Toast.LENGTH_SHORT).show();
                         }
                     },
                     error -> {
-                        // Mensagem amigável para erro de rede
                         if (error.networkResponse != null && error.networkResponse.data != null) {
-                            String errorMessage = new String(error.networkResponse.data);
                             Log.e("Cadastro", "Erro ao cadastrar");
                             mensagem.setText("Não foi possível completar o cadastro. Verifique sua conexão com a internet.");
                         } else {

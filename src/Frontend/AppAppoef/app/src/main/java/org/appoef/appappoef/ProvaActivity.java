@@ -15,11 +15,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -32,12 +34,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+
 public class ProvaActivity extends AppCompatActivity {
 
     // Declaração de constantes
+    private static final String TAG = "PROVA";
     private static final long tempoTotal = 50000;
     private static final long tempoQuestao = 10000;
-    private final String URL_PROVA_DADOS = "https://qyyjfz-3000.csb.app/provaUsuario";
+    private final String  URL_PROVA_DADOS = "https://3756jq-3000.csb.app/provaUsuario";
     private final String CHAVE = "SenhaAppoefSec";
 
     // Declaração de objetos
@@ -181,7 +186,7 @@ public class ProvaActivity extends AppCompatActivity {
 
                 if (dadosCriptografadosBase64 != null && !dadosCriptografadosBase64.isEmpty()) {
                     // Se a questão estiver criptografada, tenta descriptografar
-                     // A chave secreta usada para criptografar
+                    // A chave secreta usada para criptografar
                     questao = DesCriptoGrafar.desCriptoGrafar(dadosCriptografadosBase64, segredo);
                 } else {
                     // Caso contrário, pega o campo "Questao" diretamente
@@ -266,14 +271,94 @@ public class ProvaActivity extends AppCompatActivity {
             finalizarProva(); // Se não houver mais questões, finalizar a prova
         }
     }
-
     // Método para finalizar a prova
     private void finalizarProva() {
+        // Log para debug
+        Log.d(TAG, "Iniciando finalização da prova");
+
         textResultado.setVisibility(View.VISIBLE);
         textResultado.setText("Prova finalizada! " + resultadoAcertos + " acertos.\nAguarde o resultado no seu e-mail.");
         btnFinalizarProva.setVisibility(View.VISIBLE);
         btnProxima.setVisibility(View.GONE);
         ocultarObjetos();
+
+        // Log do resultado antes de enviar
+        Log.d(TAG, "Resultado a ser enviado: " + resultadoAcertos);
+
+        enviarResultadoVolley(resultadoAcertos);
+    }
+
+    private void enviarResultadoVolley(int resultadoAcertos) {
+        // Log para início do envio
+        Log.d(TAG, "Iniciando envio do resultado via Volley");
+        Log.d(TAG, "Token sendo enviado: " + token);
+
+        // Criar os dados para enviar
+        JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.put("resultado", resultadoAcertos);
+            Log.d(TAG, "JSON sendo enviado: " + jsonBody.toString());
+        } catch (JSONException e) {
+            Log.e(TAG, "Erro ao criar JSON", e);
+            Toast.makeText(getApplicationContext(), "Erro ao preparar dados", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Configurar a requisição POST
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.POST,
+                URL_PROVA_DADOS,
+                jsonBody,
+                response -> {
+                    // Sucesso na resposta
+                    Log.d(TAG, "Resposta do servidor: " + response.toString());
+                    Toast.makeText(getApplicationContext(), "Resultado enviado com sucesso!", Toast.LENGTH_SHORT).show();
+                },
+                error -> {
+                    // Tratamento detalhado do erro
+                    String mensagemErro = "OK";
+                    if (error.networkResponse != null) {
+                        mensagemErro += " - Código: " + error.networkResponse.statusCode;
+                        Log.e(TAG, "Erro de rede - Status Code: " + error.networkResponse.statusCode);
+
+                        // Tentar ler o corpo da resposta de erro
+                        if (error.networkResponse.data != null) {
+                            try {
+                                String responseBody = new String(error.networkResponse.data, "UTF-8");
+                                Log.e(TAG, "Corpo da resposta de erro: " + responseBody);
+                            } catch (Exception e) {
+                                Log.e(TAG, "Erro ao ler resposta de erro", e);
+                            }
+                        }
+                    } else {
+                        mensagemErro += " - Sem conexão com o servidor";
+                        Log.e(TAG, "Erro sem resposta de rede");
+                    }
+
+                    Toast.makeText(getApplicationContext(), mensagemErro, Toast.LENGTH_LONG).show();
+                    Log.e(TAG, "Erro completo: ", error);
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer " + token);
+                headers.put("Content-Type", "application/json");
+                Log.d(TAG, "Headers sendo enviados: " + headers.toString());
+                return headers;
+            }
+        };
+
+        // Configurar timeout da requisição (opcional)
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                30000, // 30 segundos de timeout
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+
+        // Adiciona a requisição à fila
+        Log.d(TAG, "Adicionando requisição à fila");
+        requestQueue.add(jsonObjectRequest);
     }
 
     // Método para ocultar objetos após finalizar a prova
@@ -330,3 +415,8 @@ public class ProvaActivity extends AppCompatActivity {
         }.start();
     }
 }
+
+
+
+
+

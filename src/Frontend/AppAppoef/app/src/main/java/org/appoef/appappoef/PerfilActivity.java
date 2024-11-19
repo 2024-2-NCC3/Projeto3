@@ -13,14 +13,14 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 public class PerfilActivity extends AppCompatActivity {
     TextView usuarioNome, usuarioEmail;
-    private Button btnSair;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_perfil);
 
+Config
        usuarioNome = findViewById(R.id.textNomeCompleto);
        usuarioEmail = findViewById(R.id.textEmail);
        btnSair = findViewById(R.id.btnSair);
@@ -30,17 +30,27 @@ public class PerfilActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        usuarioNome = findViewById(R.id.textNomeCompleto);
+        usuarioEmail = findViewById(R.id.textEmail);
+        btnSair = findViewById(R.id.btnSair);
+ main
+
+        // Recuperar os dados do SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("login_prefs", MODE_PRIVATE);
         String nome = sharedPreferences.getString("nome", "Usuário não encontrado");
         String email = sharedPreferences.getString("email", "Email não encontrado");
 
+        // Atualizar os TextViews com as informações recuperadas
         usuarioNome.setText("Nome: " + nome);
         usuarioEmail.setText("Email: " + email);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+        // Configurar o botão Sair
+        btnSair.setOnClickListener(view -> {
+
+            // Redirecionar para a página de login
+            Intent intent = new Intent(PerfilActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish(); // Finalizar a activity atual
         });
     }
 }
