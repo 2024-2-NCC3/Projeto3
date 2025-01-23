@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Usuário</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="APPOEFlogo.png" alt="Logo APPOEF">
+            <h1>Gestão de Usuários</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <table id="tabelaUsuarios">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Categoria</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Exemplo de linha -->
+                <tr>
+                    <td>João Silva</td>
+                    <td>
+                        <select>
+                            <option value="Administrador">Administrador</option>
+                            <option value="Associado">Associado</option>
+                            <option value="Usuario">Usuário</option>
+                        </select>
+                    </td>
+                    <td><button>Salvar</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="index.html"><button>Voltar</button></a>
+    </div>
+    <script src="gestao_usuario.js"></script>
+</body>
+</html>

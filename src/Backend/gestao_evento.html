@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Evento</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="APPOEFlogo.png" alt="Logo APPOEF">
+            <h1>Gestão de Eventos</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <form id="formEvento">
+            <label for="tituloEvento">Título do Evento:</label>
+            <input type="text" id="tituloEvento" name="tituloEvento" required>
+
+            <label for="dataEvento">Data do Evento:</label>
+            <input type="date" id="dataEvento" name="dataEvento" required>
+
+            <label for="descricaoEvento">Descrição:</label>
+            <textarea id="descricaoEvento" name="descricaoEvento" rows="3" required></textarea>
+
+            <button type="button" onclick="adicionarEvento()">Adicionar Evento</button>
+        </form>
+
+        <table id="tabelaEventos">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Data</th>
+                    <th>Descrição</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <a href="index.html"><button>Voltar</button></a>
+    </div>
+
+    <script src="gestao_evento.js"></script>
+</body>
+</html>

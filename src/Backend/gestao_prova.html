@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Prova</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="APPOEFlogo.png" alt="Logo APPOEF">
+            <h1>Gestão da Prova</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <form id="formProva">
+            <label for="pergunta">Pergunta:</label>
+            <textarea id="pergunta" name="pergunta" rows="3" required></textarea>
+
+            <label>Respostas:</label>
+            <input type="text" id="resposta1" name="resposta1" placeholder="Resposta 1" required>
+            <input type="text" id="resposta2" name="resposta2" placeholder="Resposta 2" required>
+            <input type="text" id="resposta3" name="resposta3" placeholder="Resposta 3" required>
+            <input type="text" id="resposta4" name="resposta4" placeholder="Resposta 4" required>
+
+            <label for="correta">Resposta Correta:</label>
+            <select id="correta" name="correta" required>
+                <option value="1">Resposta 1</option>
+                <option value="2">Resposta 2</option>
+                <option value="3">Resposta 3</option>
+                <option value="4">Resposta 4</option>
+            </select>
+
+            <button type="button" onclick="adicionarPergunta()">Adicionar Pergunta</button>
+        </form>
+
+        <table id="tabelaProvas">
+            <thead>
+                <tr>
+                    <th>Pergunta</th>
+                    <th>Respostas</th>
+                    <th>Correta</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <a href="index.html"><button>Voltar</button></a>
+    </div>
+
+    <script src="gestao_prova.js"></script>
+</body>
+</html>

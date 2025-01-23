@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Inicial</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff;
+            color: #333;
+        }
+
+        header{
+            margin-top: 20px;
+            background-color: #1f8ac0;
+            padding: 20px;
+        }
+
+        header .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        header .logo-container img {
+            background-color: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            height: 50px;
+            width: auto;
+        }
+
+        header .logo-container h1 {
+            margin: 0;
+            font-size: 1.5em;
+            color: white;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #1f8ac0;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #007acc;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="APPOEFlogo.png" alt="Logo APPOEF">
+        </div>
+    </header>
+
+    <div class="container">
+        <h2>Página Inicial</h2>
+        <div class="button-container">
+            <a href="gestao_prova.html"><button>Gestão de Prova</button></a>
+            <a href="gestao_evento.html"><button>Gestão de Evento</button></a>
+            <a href="gestao_usuario.html"><button>Gestão de Usuário</button></a>
+        </div>
+    </div>
+</body>
+</html>
